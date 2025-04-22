@@ -1,5 +1,5 @@
 # livechat
 
-# AI chatbot
-# widget
-# whatsapp and telegram integration
+AI chatbot
+widget
+whatsapp and telegram integration
