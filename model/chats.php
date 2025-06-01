@@ -1,0 +1,30 @@
+<?php
+
+    class Chat extends MeekroORM {
+
+        static function _scopes() {
+            return [
+                'is_merchant' => fn($merchant_id) => return self::where('merchant_id = %i', $merchant_id);
+                'is_pinned' => fn() => return self::where("pin > 0");
+                'recent' => fn($updated_at) => return self::where('updated_at > %s)', $updated_at);
+            ];
+        }
+
+        private function get(){
+            //
+        }
+
+        private function getOne(){
+
+        }
+
+        private function delete(){
+
+        }
+
+        private function update(){
+
+        }
+    }
+
+?>

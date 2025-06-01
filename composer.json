@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "4.*",
+        "zircote/swagger-php": "^5.1",
+        "alibabacloud/captcha-20230305": "^1.1"
+    }
+}
