@@ -11,7 +11,6 @@
 
 	inputParams('merchant_id', 'start', 'end', 'page', 'limit');
 
-
 	if (empty($merchant_id)) exit();
 
 	if (empty($start)) {
@@ -82,5 +81,5 @@
 	// $data = array_slice($data,0,200);
 
 	returnAPI('SUCCESS', $data);
-	
+
 ?>
