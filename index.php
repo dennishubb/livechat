@@ -6,6 +6,7 @@
 
     define('ROOT', __DIR__);
 
-    print_r($url);
+    if($path[0] === 'api') require_once(__DIR__.'/api/index.php'); //include api
+    else if($path[0] === 'public') echo "public"; //include public
 
 ?>
