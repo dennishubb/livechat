@@ -9,22 +9,7 @@
                 'recent' => fn($updated_at) => self::where('updated_at > %s)', $updated_at),
             ];
         }
-
-        private function get(){
-            //
-        }
-
-        private function getOne(){
-
-        }
-
-        private function delete(){
-
-        }
-
-        private function update(){
-
-        }
+        
     }
 
 ?>
