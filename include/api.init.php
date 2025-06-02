@@ -9,6 +9,10 @@
     DB::$dsn = 'mysql:host=172.31.30.41;dbname=chat';
     DB::$user = 'chat_user';
     DB::$password = 'hJz97Hy4z6Nv';
-    DB::addHook('post_run', http_response(code:400, message:$hash['error']));
+    DB::addHook('post_run', function($hash) {
+        http_response(code:400, message:$hash['error']);
+    });
+
+
     
 ?>
