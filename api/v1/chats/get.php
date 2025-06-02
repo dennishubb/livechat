@@ -31,9 +31,14 @@
 
 	//any pinned will be selected first
 
-	$chat = new Chat();
-	//$chats = $chat::searchMany("SELECT id, last_message FROM chats WHERE merchant_id = %i AND status = %i AND updated_at BETWEEN %s AND %s", $merchant_id, 1, $start, $end);
-	$chats = $chat::scope('is_merchant', 6)->toArray();
+	// $chat = new Chat();
+	// $chats = $chat::searchMany("SELECT id, last_message FROM chats WHERE merchant_id = %i AND status = %i AND updated_at BETWEEN %s AND %s", $merchant_id, 1, $start, $end);
+	// $chats = $chat::scope('is_merchant', 6)->toArray();
+	// print_r($chats);
+	// print_r($chats[0])
+
+	$chats = DB::query("SELECT merchant_id, user_id, pin, last_message, updated_at FROM chats WHERE merchant_id = %i AND status = %i AND updated_at BETWEEN %s AND %s", $merchant_id, 1, $start, $end);
+
 	print_r($chats);
 
 	// $ret = [];
