@@ -9,7 +9,7 @@
 
 	include(ROOT.'/model/chats.php');
 
-	inputParams('merchant_id', 'start', 'end', 'page', 'limit');
+	inputParams(['merchant_id', 'start', 'end', 'page', 'limit']);
 
 	if (empty($merchant_id)) exit();
 
@@ -30,9 +30,8 @@
 	//any pinned will be selected first
 
 	$chat = new Chat();
-	$chats = $chat::scope('is_merchant', $merchant_id)->scope('is_pinned');
+	$chats = $chat::scope('is_merchant', $merchant_id)->scope('is_pinned')->toArray();
 
-	print_r($chats[0]);
 	print_r($chats);
 
 	// $ret = [];
