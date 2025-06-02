@@ -7,7 +7,7 @@
     require_once(ROOT.'/include/meekroORM_3.1.3.php');
 
     DB::$dsn = 'mysql:host=172.31.30.41;dbname=chat';
-    DB::$user = 'admin';
-    DB::$password = '0fN832TXdGdB';
+    DB::$user = 'chat_user';
+    DB::$password = 'hJz97Hy4z6Nv';
     
 ?>
