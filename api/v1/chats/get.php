@@ -30,8 +30,9 @@
 	//any pinned will be selected first
 
 	$chat = new Chat();
-	$chats = $chat::scope('is_merchant', $merchant_id)->scope('is_pinned')->toArray();
+	$chats = $chat::scope('is_merchant', $merchant_id)->scope('is_pinned');
 
+	print_r($chats[0]);
 	print_r($chats);
 
 	// $ret = [];
