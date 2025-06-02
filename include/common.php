@@ -138,7 +138,7 @@
         }
     }
 
-    function response($code = 200, $message = '', $data = array()){
+    function http_response($code = 200, $message = '', $data = array()){
         
         switch($code){
             case 200:

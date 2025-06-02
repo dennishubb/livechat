@@ -81,6 +81,6 @@
 
 	// $data = array_slice($data,0,200);
 
-	response(data:$chats);
+	http_response(data:$chats);
 
 ?>
