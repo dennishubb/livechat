@@ -138,4 +138,24 @@
         }
     }
 
+    function response($code = 200, $message = '', $data = array()){
+        
+        switch($code){
+            case 200:
+                $status = 'success';
+                break;
+
+            case 400:
+            case 403:
+            case 404:
+                $status = 'error';
+                break;
+        }
+
+        http_response_code($code);
+        
+
+        exit(json_encode(['status' => $status, 'message' => $message, 'data' => $data, 'timestamp' => date('c')]));
+    }
+
 ?>

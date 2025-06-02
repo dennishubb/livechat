@@ -80,6 +80,6 @@
 
 	// $data = array_slice($data,0,200);
 
-	returnAPI('SUCCESS', $data);
+	response();
 
 ?>

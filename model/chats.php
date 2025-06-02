@@ -9,7 +9,7 @@
                 'recent' => fn($updated_at) => self::where('updated_at > %s)', $updated_at),
             ];
         }
-        
+
     }
 
 ?>
