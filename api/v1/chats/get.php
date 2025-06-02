@@ -30,8 +30,8 @@
 	//any pinned will be selected first
 
 	$chat = new Chat();
-	$chats = $chat::scope('is_merchant', $merchant_id)->scope('is_pinned')->dirtyHash();
-
+	$chats = $chat::searchMany("SELECT * FROM chats WHERE merchant_id = %i AND status = %i AND updated_at BETWEEN %s AND %s", $merchant_id, 1, $start, $end);
+	
 	print_r($chats);
 
 	// $ret = [];
