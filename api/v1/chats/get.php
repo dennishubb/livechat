@@ -21,6 +21,8 @@
 
 	if(!empty($end)){
 		$end = date('Y-m-d H:i:s', strtotime($end));
+	}else{
+		$end = date('Y-m-d H:i:s');
 	}
 
 	if(empty($limit)) $limit = '';
