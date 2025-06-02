@@ -9,5 +9,8 @@
     DB::$dsn = 'mysql:host=172.31.30.41;dbname=chat';
     DB::$user = 'chat_user';
     DB::$password = 'hJz97Hy4z6Nv';
+    DB::$error_handler = function($params) {
+        http_response(code:400, message:$params['error']);
+    };
     
 ?>
