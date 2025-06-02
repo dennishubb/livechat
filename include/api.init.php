@@ -10,7 +10,8 @@
     DB::$user = 'chat_user';
     DB::$password = 'hJz97Hy4z6Nv';
     DB::addHook('post_run', function($hash) {
-        http_response(code:400, message:$hash['error']);
+        if(isset($hash['error']))
+            http_response(code:400, message:$hash['error']);
     });
 
 
