@@ -1,36 +1,18 @@
 <?php
-checkUser('ADMIN');
 
-validateInput([
-	'userId' => ['type' => 'INT'],
-	'setPin' => ['type' => 'INT', 'optional' => 1]
-]);
+parse_request(['merchant_id', 'user_id', 'pin_id']);
 
-$count = DB::queryFirstField("SELECT COUNT(*) FROM users WHERE id = %i AND merchant_id = %i", $userId, $MERCHANT['id']);
-if (empty($count)) clientErrorMessage('Invalid User.');
+if(empty($user_id)) http_response(code:400, message:'invalid user');
 
-$cachekey = 'PINCHAT-'.$MERCHANT['id'];
-$pinchat = 0;
+include(ROOT.'/model/chat.php');
 
-if (isset($_POST['setPin'])) {
-	if (empty($setPin)) {
-		$redischat->sRem($cachekey, $userId);
-	} else {
-		$redischat->sAdd($cachekey, $userId);
-		$pinchat = $setPin;
-	}
-} else {
-	if ($redischat->sIsMember($cachekey, $userId)) {
-		$redischat->sRem($cachekey, $userId);
-	} else {
-		$redischat->sAdd($cachekey, $userId);
-		$pinchat = 1;
-	}
-}
+$chat = Chat::Search(['merchant_id' => $merchant_id, 'user_id' => $user_id]);
+if(!isset($chat->id)) http_response(code:404);
 
-$redischat->setEx('PINCHATDATETIME-'.$MERCHANT['id'], 86400, $NOW);
+$chat->pin_id = empty($pin_id) ? 0 : $pin_id;
+$chat->pinned = empty($pin_id) ? 0 : 1;
+$chat->save();
 
-PU::update($userId, ['setting' => ['pinchat' => $pinchat]]);
+http_response();
 
-returnAPI('SUCCESS');
 ?>
