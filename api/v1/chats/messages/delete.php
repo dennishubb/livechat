@@ -3,11 +3,9 @@
 
     parse_request(['merchant_id', 'message_id']);
 
-    $message = new Message();
-    $message::Load($message_id);
+    $message = Message::Load($message_id);
 
-    
-    if(!$message->__isset('id')) http_response(code:400);
+    if(!$message->has('id')) http_response(code:400);
     if($message->merchant_id != $merchant_id) http_response(code:403);
 
     $message->status = 2;
