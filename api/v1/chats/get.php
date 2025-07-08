@@ -26,7 +26,7 @@
 	}
 	else {
 		if($get_pin){
-			$pinned =  DB::query("SELECT merchant_id, user_id, pinned, pin_id, last_message, last_message_user_id, updated_at FROM chats WHERE merchant_id = %i AND status = %i AND pinned = % ORDER BY updated_at DESC", $merchant_id, 1, 1);
+			$pinned =  DB::query("SELECT merchant_id, user_id, pinned, pin_id, last_message, last_message_user_id, updated_at FROM chats WHERE merchant_id = %i AND status = %i AND pinned = %i ORDER BY updated_at DESC", $merchant_id, 1, 1);
 			$chats = DB::query("SELECT merchant_id, user_id, pinned, pin_id, last_message, last_message_user_id, updated_at FROM chats WHERE merchant_id = %i AND status = %i AND pinned = %i AND updated_at BETWEEN %s AND %s ORDER BY updated_at DESC $queryLimit", $merchant_id, 1, 0, $start, $end);
 		}else{
 			$chats = DB::query("SELECT merchant_id, user_id, pinned, pin_id, last_message, last_message_user_id, updated_at FROM chats WHERE merchant_id = %i AND status = %i AND pinned IN (0,1) AND updated_at BETWEEN %s AND %s ORDER BY updated_at DESC $queryLimit", $merchant_id, 1, 0, $start, $end);
