@@ -1,7 +1,7 @@
 <?php
     
     $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
-    $req_token = getallheaders()['X-AUTHORIZATION-KEY'];
+    $req_token = trim(getallheaders()['X-Authorization-Key']);
     if($req_token !== $token) http_response(code:403);
 
     require_once(ROOT.'/db/meekroDB_3.1.3.php');
