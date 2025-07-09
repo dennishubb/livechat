@@ -12,5 +12,5 @@
     $message->updated_at = $NOW;
     $message->save();
 
-    http_response();
+    http_response(data:['user_id' => $message->user_id]);
 ?>
