@@ -4,8 +4,7 @@
 
     include(ROOT.'/model/whatsapp.php');
 
-    $whatsapp = new Whatsapp();
-    $whatsapp::Load($whatsapp_id);
+    $whatsapp = Whatsapp::Load($whatsapp_id);
 
     if(!$whatsapp->has('id')) http_response(code:404);
     if($whatsapp->merchant_id != $merchant_id) http_response(code:403);
