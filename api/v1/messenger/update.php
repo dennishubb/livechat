@@ -22,7 +22,7 @@
     }
 
     $messenger = Messenger::Search($search);
-    if(!isset($messenger->id)) http_response(code:404, message:"record not found");
+    if($messenger === null) http_response(code:404, message:"record not found");
     if($messenger->merchant_id != $merchant_id) http_response(code:403, message:"invalid merchant");
 
     foreach($update_data as $key => $value){

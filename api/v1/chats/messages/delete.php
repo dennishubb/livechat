@@ -5,7 +5,7 @@
 
     $message = Message::Load($message_id);
 
-    if(!$message->has('id')) http_response(code:404);
+    if($message === null) http_response(code:404);
     if($message->merchant_id != $merchant_id) http_response(code:403);
 
     $message->status = 2;

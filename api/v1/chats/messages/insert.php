@@ -10,7 +10,7 @@
 
     //create or update chatroom whenever a message is sent
     $chat = Chat::Search("SELECT id FROM chats WHERE user_id = $i AND merchant_id = %i", $user_id, $merchant_id);
-    if(!$chat->has('id')){
+    if($chat === null){
         $chat = new Chat();
         $chat->merchant_id = $merchant_id;
         $chat->user_id = $user_id;

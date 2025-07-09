@@ -9,7 +9,7 @@
     $messenger = Messenger::Search("SELECT id FROM messenger WHERE merchant_id = %i AND type = %s AND (user_id = %i OR sender_id = %s) LIMIT 1", $merchant_id, $type, $user_id, $sender_id);
 
     $message = '';
-    if(!isset($messenger->id)){
+    if($messenger === null){
         $messenger = new Messenger();
         $messenger->merchant_id = $merchant_id;
         $messenger->user_id = $user_id;

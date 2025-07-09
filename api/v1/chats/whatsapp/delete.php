@@ -6,7 +6,7 @@
 
     $whatsapp = Whatsapp::Load($whatsapp_id);
 
-    if(!$whatsapp->has('id')) http_response(code:404);
+    if($whatsapp === null) http_response(code:404);
     if($whatsapp->merchant_id != $merchant_id) http_response(code:403);
 
     $whatsapp->destroy();
