@@ -2,7 +2,8 @@
 
     parse_request(['merchant_id', 'domain_id', 'templates']);
 
-    if(empty($merchant_id) || empty($domain_id) || empty($templates)) http_response(code:400);
+    if(empty($merchant_id) || empty($templates)) http_response(code:400);
+    if(strlen($domain_id) === 0) http_response(code:400);
 
     include(ROOT.'/model/template.php');
 
