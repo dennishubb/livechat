@@ -19,7 +19,7 @@ if($last) {
     else { $page = $page * $limit; $queryLimit = "LIMIT ".($page !== ''? "$page, ":'')."$limit"; }
 
     $user_ids = DB::query("SELECT DISTINCT(user_id) FROM messages WHERE chat_id = %i AND status = %i ORDER BY created_at DESC LIMIT 200", $chat->id, 1);
-    $messages = DB::query("SELECT id, user_id, (CASE status WHEN 1 THEN NULL WHEN 2 THEN 'DELETED' ELSE '' END) AS status, source, created_at, message FROM messages WHERE chat_id = %i AND status = %i ORDER BY created_at DESC limit 200", $chat['id'], 1);
+    $messages = DB::query("SELECT id, user_id, (CASE status WHEN 1 THEN NULL WHEN 2 THEN 'DELETED' ELSE '' END) AS status, source, created_at, message FROM messages WHERE chat_id = %i AND status = %i ORDER BY created_at DESC limit 200", $chat->id, 1);
     $res['messages'] = $messages;
     $res['user_ids'] = $user_ids;
     $res['pinned']   = $chat->pinned;
