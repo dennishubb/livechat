@@ -11,7 +11,7 @@
         include(ROOT.'/model/whatsapp.php');
 
         $whatsapp = Whatsapp::Search(['mobile' => $mobile]);
-        if(!isset($whatsapp->id)) http_response(code:404);
+        if(!$whatsapp->has('id')) http_response(code:404);
     
         $whatsapp->status      = $status;
         $whatsapp->updated_at  = $NOW;

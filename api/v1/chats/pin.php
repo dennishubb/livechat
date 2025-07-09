@@ -7,7 +7,7 @@ if(empty($user_id)) http_response(code:400, message:'invalid user');
 include(ROOT.'/model/chat.php');
 
 $chat = Chat::Search(['merchant_id' => $merchant_id, 'user_id' => $user_id]);
-if(!isset($chat->id)) http_response(code:404);
+if(!$chat->has('id')) http_response(code:404);
 
 $chat->pin_id = empty($pin_id) ? 0 : $pin_id;
 $chat->pinned = empty($pin_id) ? 0 : 1;
