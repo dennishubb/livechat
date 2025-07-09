@@ -15,7 +15,7 @@
             $template = new Template();
             $template->merchant_id = $merchant_id;
             $template->domain_id = $domain_id;
-            $template->type = $type;
+            $template->type = $key;
             $template->message = $value;
             $template->save();
         }else{
