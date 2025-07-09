@@ -4,8 +4,7 @@
 
     parse_request(['merchant_id', 'message_id', 'status']);
 
-    $message = new Message();
-    $message::Load($message_id);
+    $message = Message::Load($message_id);
 
     if(!$message->has('id')) http_response(code:404);
 
