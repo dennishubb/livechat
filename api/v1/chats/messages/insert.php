@@ -2,12 +2,14 @@
 
     include(ROOT.'/model/message.php');
 
-    parse_request(['merchant_id', 'user_id', 'admin_id', 'message', 'source', 'status', 'created_datetime']);
+    parse_request(['merchant_id', 'user_id', 'admin_id', 'message', 'source', 'status', 'created_datetime', 'template_id']);
 
     include(ROOT.'/model/chat.php');
 
+    if(empty($user_id) || empty($merchant_id)) http_response(code:400); 
+
     //create or update chatroom whenever a message is sent
-    $chat = Chat::Search("SELECT id FROM chats WHERE user_id = $i", $user_id);
+    $chat = Chat::Search("SELECT id FROM chats WHERE user_id = $i AND merchant_id = %i", $user_id, $merchant_id);
     if(!$chat->has('id')){
         $chat = new Chat();
         $chat->merchant_id = $merchant_id;
@@ -20,6 +22,7 @@
         $chat->last_message = $message;
         $chat->last_message_user_id = $admin_id ? $admin_id : $user_id;
         $chat->save();
+        $chat_id = $chat->id;
     }
     
     $message = new Message();
@@ -31,7 +34,8 @@
     $message->status        = $status;
     $message->created_at    = $created_datetime;
     $message->updated_at    = $created_datetime;
-    if(!empty($chat_id)) $message->chat_id = $chat_id;
+    $message->template_id   = empty($template_id) ? 0 : $template_id;
+    $message->chat_id       = $chat_id;
     $message->save();
     $res['id'] = DB::insertId();
 

@@ -4,13 +4,13 @@
 
 	if (empty($merchant_id)) http_response(code:400, message:'invalid merchant');
 
-    $res = DB::query("SELECT type, message FROM templates WHERE merchant_id = %i AND domain_id = %i AND status = %i", 0, 0, 1);
+    $res = DB::query("SELECT id, type, message FROM templates WHERE merchant_id = %i AND domain_id = %i AND status = %i", 0, 0, 1);
     $defaults = array();
     foreach($res as $data){
         $defaults[$data['type']] = $data['message'];
     }
 
-    $res = DB::query("SELECT type, message FROM templates WHERE merchant_id = %i AND domain_id = %i".(empty($status) ? '' : " AND status = $status"), $merchant_id, $domain_id);
+    $res = DB::query("SELECT id, type, message FROM templates WHERE merchant_id = %i AND domain_id = %i".(empty($status) ? '' : " AND status = $status"), $merchant_id, $domain_id);
     $templates = array();
     foreach($res as $data){
         $templates[$data['type']] = $data['message'];
