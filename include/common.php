@@ -70,14 +70,14 @@
     function parse_request($params,$striptags = true) {
         foreach ($params as $param) {
             global $$param;
-            $flag = false;
             $tmp = isset($_POST[$param]) ? $_POST[$param] : (isset($_GET[$param]) ? $_GET[$param] : '');
-            if(is_array($tmp)) { $flag = true; $tmp = json_encode($tmp); }
-            if ($striptags) {
-                $tmp = strip_tags($tmp, '<b><a>');
+            if(is_array($tmp)) $$param = $tmp;
+            else {
+                if ($striptags) {
+                    $tmp = strip_tags($tmp, '<b><a>');
+                }
+                $$param = trim($tmp);
             }
-            $$param = trim($tmp);
-            if($flag) $tmp = json_decode($tmp, true);
         }
     }
 
