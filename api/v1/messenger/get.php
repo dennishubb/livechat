@@ -33,8 +33,9 @@
     if(empty($field)) $select = '*';
     else $select = implode(',', $field);
     
-    if(count($field) === 1){
-        $res = DB::queryFirstField("SELECT $select FROM messenger WHERE $where", $params);
+    if(!empty($field) && count($field)  === 1){
+        $res = DB::queryFirstColumn("SELECT $select FROM messenger WHERE $where", $params);
+        if(!empty($res) && count($res) === 1) $res = $res[0];
     }else{
         $res = DB::query("SELECT $select FROM messenger WHERE $where", $params);
     }
