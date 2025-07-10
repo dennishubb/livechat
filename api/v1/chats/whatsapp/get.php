@@ -9,7 +9,7 @@
     else{
         if(!empty($type)) {$where .= ' AND type = %i_type'; $query['type'] = $type;}
         if(!empty($status)) {$where .= ' AND status = %i_status'; $query['status'] = $status;}
-        if(!empty($updated_at)) {$where .= ' AND updated_at = %i_updated_at'; $query['updated_at'] = $updated_at;}
+        if(!empty($updated_at)) {$where .= ' AND updated_at >= %i_updated_at'; $query['updated_at'] = $updated_at;}
     }
 
     if($mobile_only) $data = DB::queryFirstColumn("SELECT mobile FROM whatsapp WHERE $where", $query);
