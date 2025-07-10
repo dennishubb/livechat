@@ -28,9 +28,9 @@
         }
     }
 
-    $res['templates'] = $templates;
-    $res['templates_id'] = $templates_id;
+    $resp['templates'] = $templates;
+    $resp['templates_id'] = $templates_id;
 
-	http_response(data:$res);
+	http_response(data:$resp);
 
 ?>
