@@ -14,12 +14,10 @@
         $chat->last_message = $message;
         $chat->last_message_user_id = $user_id;
         $chat->save();
-        $chat_id = DB::insertId();
     }else{
         $chat->last_message = $message;
         $chat->last_message_user_id = $admin_id ? $admin_id : $user_id;
         $chat->save();
-        $chat_id = $chat->id;
     }
     
     include(ROOT.'/model/message.php');
@@ -30,9 +28,9 @@
     $chat_message->message       = $message;
     $chat_message->source        = $source;
     $chat_message->template_id   = empty($template_id) ? 0 : $template_id;
-    $chat_message->chat_id       = $chat_id;
+    $chat_message->chat_id       = $chat->id;
     $chat_message->save();
-    $res['id'] = DB::insertId();
+    $res['id'] = $chat_message->id;
 
     http_response(data:$res);
 
