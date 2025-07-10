@@ -6,7 +6,7 @@
 
     //create or update chatroom whenever a message is sent
     include(ROOT.'/model/chat.php');
-    $chat = Chat::Search("SELECT id FROM chats WHERE user_id = $i AND merchant_id = %i", $user_id, $merchant_id);
+    $chat = Chat::Search("SELECT id FROM chats WHERE user_id = %i AND merchant_id = %i", $user_id, $merchant_id);
     if($chat === null){
         $chat = new Chat();
         $chat->merchant_id = $merchant_id;
