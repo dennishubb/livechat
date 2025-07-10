@@ -21,7 +21,6 @@
     }
 
     $diff = array_diff_key($defaults, $templates);
-    print_r($diff);
     if(count($diff) > 0){
         foreach($diff as $key => $value){
             $templates[$key] = $value;
