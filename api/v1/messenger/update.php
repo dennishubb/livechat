@@ -2,14 +2,14 @@
 
     parse_request(['update_data', 'user_id', 'type', 'sender_id', 'messenger_id', 'merchant_id']);
 
-    if(empty($update_data) || empty($where) || empty($merchant_id)) http_response(code:400, message:"Invalid request");
+    if(empty($update_data) || empty($merchant_id)) http_response(code:400, message:"Invalid request");
     if(!is_array($update_data)) http_response(code:400, message:"invalid request");
 
     $updatable_columns = array('user_id', 'sender_id', 'updated_at');
     $to_update_keys = array_keys($update_data);
 
     if(empty($to_update_keys)) http_response(code:400, message:"invalid request");
-    if(!in_array($to_update_keys, $updatable_columns)) http_response(code:400, message:"invalid request");
+    if(count(array_diff($to_update_keys, $updatable_columns)) > 0) http_response(code:400, message:"invalid update field");
 
     include(ROOT.'/model/messenger.php');
 
