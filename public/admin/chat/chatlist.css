@@ -1,0 +1,112 @@
+#chatlist {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+#chatlist .pin-types {
+	background: #ccc;
+	font-size: 13px;
+	line-height: 24px;
+	border-bottom: 1px solid #999;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+	position: relative;
+	overflow: hidden;
+}
+#chatlist .pin-types .pin-type {
+	color: #00f;
+	text-decoration: underline;
+	margin-left: 10px;
+	float: left;
+}
+#chatlist .pin-types .pin-type.selected {
+	color: #000;
+	font-weight: 700;
+}
+#chatlist .chat-sound {
+	margin: 4px 2px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 11px;
+	background: #ddd;
+	padding: 3px 5px;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	line-height: 1;
+	float: right;
+}
+#chatlist .chat-sound:hover {
+	background-color: #ccc;
+}
+#chatlist .scrollable {
+	position: relative;
+	width: 100%;
+	height: calc(100% - 25px);
+	background: #FFEBEE;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+#chatlist .chat {
+	display: block;
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+	padding: 12px 10px;
+	cursor: pointer;
+}
+#chatlist .chat * {
+	cursor: pointer;
+}
+#chatlist .chat.orange {
+	background: #ffe0b2;
+}
+#chatlist .chat.red {
+	background: #ffcdd2;
+}
+#chatlist .chat.pinned {
+	background: #d1c4e9;
+}
+#chatlist .chat.yellow {
+	background: #f6f7bb;
+}
+#chatlist .chat .time {
+	float: right;
+	margin-top: 1px;
+	font-size: 12px;
+	color: #888;
+}
+#chatlist .chat .name {
+	font-weight: 700;
+	color: #000;
+	text-transform: uppercase;
+}
+#chatlist .chat .text {
+	font-size: 13px;
+	margin-top: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: calc(100% - 80px);
+	color: #555;
+}
+#chatlist .chat .exclamation {
+	position: absolute;
+	right: 35px;
+	top: 33px;
+	color: transparent;
+	font-size: 18px;
+}
+#chatlist .chat.orange .exclamation {
+	color: #8BC34A;
+}
+#chatlist .chat.red .exclamation {
+	color: #F44336;
+}
+#chatlist .chat .pin {
+	text-decoration: underline;
+	color: blue;
+	font-size: 11px;
+	position: absolute;
+	top: 34px;
+	right: 10px;
+}

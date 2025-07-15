@@ -1,0 +1,55 @@
+#main-twofa {
+	overflow: hidden;
+}
+#main-twofa .t2 {
+	margin-top: 15px;
+}
+#main-twofa .links a {
+	color: blue;
+    text-decoration: underline;
+    margin: 5px 5px 0 0;
+    display: inline-block;
+}
+#main-twofa .qr-wrapper {
+	overflow: hidden;
+	margin-top: 15px;
+}
+#main-twofa .qr-wrapper img {
+	float: left;
+    width: 120px;
+    height: 120px;
+    border: 1px solid;
+    padding: 10px;
+}
+#main-twofa .qr-wrapper p {
+	float: left;
+	width: calc(100% - 130px);
+	background: #FFE082;
+	border: 1px solid #FFC107;
+	padding: 8px 10px;
+	font-size: 13px;
+	border-radius: 4px;
+	margin: 0 0 0 10px;
+}
+#main-twofa .qr-wrapper input {
+    float: left;
+    width: 300px;
+    margin: 10px 0 0 10px;
+}
+#main-twofa .qr-wrapper a {
+    float: left;
+    width: 150px;
+    margin: 10px 0 0 10px;
+}
+#main-twofa input {
+    margin-top: 10px;
+}
+#main-twofa .btns {
+	overflow: hidden;
+    text-align: center;
+}
+#main-twofa .btns .btn {
+	margin: 15px 5px 0 0;
+    display: inline-block;
+    width: 100px;
+}

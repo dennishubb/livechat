@@ -1,0 +1,30 @@
+<div class="actions">
+	<a class="action profile"></a>
+	<% if (parseInt(_.config('AddPin')) === 1) { %>
+		<a class="action pin" data-setpin="10"><%= _.pinChatRename('PIN10') %></a>
+		<a class="action pin" data-setpin="9"><%= _.pinChatRename('PIN9') %></a>
+		<a class="action pin" data-setpin="8"><%= _.pinChatRename('PIN8') %></a>
+		<a class="action pin" data-setpin="7"><%= _.pinChatRename('PIN7') %></a>
+		<a class="action pin" data-setpin="6"><%= _.pinChatRename('PIN6') %></a>
+	<% } %>
+	<a class="action pin" data-setpin="5"><%= _.pinChatRename('PIN5') %></a>
+	<a class="action pin" data-setpin="4"><%= _.pinChatRename('PIN4') %></a>
+	<a class="action pin" data-setpin="3"><%= _.pinChatRename('PIN3') %></a>
+	<a class="action pin" data-setpin="2"><%= _.pinChatRename('PIN2') %></a>
+	<a class="action pin" data-setpin="1"><%= _.pinChatRename('PIN1') %></a>
+	<a class="action pin" data-setpin="0">UNPIN</a>
+</div>
+<div class="scrollable"><div class="wrapper"></div></div>
+<div class="chat-tools">
+	<textarea></textarea>
+	<i class="tool send default fa fa-paper-plane"></i>
+	<i class="tool send whatsapp fa fa-whatsapp"></i>
+	<label class="tool file fa fa-paperclip"><input type="file" name="file"></label>
+	<select name="template"></select>
+	<div class="shortcuts"></div>
+	<div class="voice">
+		<a class="voicestart"><i class="fa fa-microphone"></i></a>
+		<a class="voicesend disabled"><i class="fa fa-check"></i></a>
+		<a class="voicecancel disabled"><i class="fa fa-times"></i></a>
+	</div>
+</div>

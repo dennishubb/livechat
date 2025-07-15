@@ -1,0 +1,15 @@
+#main-editor .iframe-page {
+    height: 500px;
+    width: 100%;
+    margin-top: 10px;
+}
+#main-editor .btn{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 100px;
+    float: left;
+}
+#main-editor .typeOptions{
+    margin-top: 10px;
+    width: 100px;
+}
