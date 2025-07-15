@@ -2,9 +2,6 @@ define(function(require) {
 	
 	var Backbone		= require('backbone'),
 		Access			= require('models/Access'),
-		CreditLogView	= require('views/admins/creditLog'),
-		EditorView		= require('views/main/editor/editor'),
-		TwofaView		= require('views/main/twofa/twofa'),
 		tpl				= require('text!views/main/main.html'),
 		cssA			= require('text!views/main/cssA.html');
 	
