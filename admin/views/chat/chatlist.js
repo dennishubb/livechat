@@ -1,7 +1,7 @@
 define(function(require) {
 	
 	var Backbone	= require('backbone'),
-		tpl			= require('text!views/chatlist/chatlist.html');
+		tpl			= require('text!views/chat/chatlist.html');
 	
 	return Backbone.View.extend({
 		
