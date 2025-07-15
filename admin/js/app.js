@@ -1,21 +1,19 @@
 require.config({
 	baseUrl: '.',
 	paths: {
-		jquery: 'lib/jquery-1.11.2.min',
-		underscore: 'lib/underscore-1.7.0.min',
-		backbone: 'lib/backbone-1.1.2.min',
-		text: 'lib/text-2.0.12',
-		views: 'js/views',
-		models: 'js/models'
+		jquery: '/admin/lib/jquery-1.11.2.min',
+		underscore: '/admin/lib/underscore-1.7.0.min',
+		backbone: '/admin/lib/backbone-1.1.2.min',
+		text: '/admin/lib/text-2.0.12',
+		views: '/admin/views'
 	},
 	deps: [
-		'js/common',
-		'lib/moment.min',
-		'lib/SMSCounter',
-		'plugins/simplePagination/simplePagination'
+		'/admin/js/common',
+		'/admin/lib/moment.min',
+		'/admin/lib/SMSCounter'
 	],
 	shim: {
-		'backbone': ['js/common','jquery'],
+		'backbone': ['admin/js/common','jquery'],
 		'js/common': ['underscore'],
 		'plugins/simplePagination/simplePagination': ['jquery'],
 		'text':['jquery'],
