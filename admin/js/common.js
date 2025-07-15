@@ -1,4 +1,4 @@
-define(['lib/sweetalert2.all.min','lib/Autolinker.min','models/Access'], function(swal,Autolinker,Access) {
+define(['lib/sweetalert2.all.min','lib/Autolinker.min','js/Access'], function(swal,Autolinker,Access) {
 
 	window.getApiHost = function (mId) {
 		var apiHost = window.location.host;
@@ -16,20 +16,17 @@ define(['lib/sweetalert2.all.min','lib/Autolinker.min','models/Access'], functio
 	}
 
 	var endPointURL = 'wallet-merchant-env-2.eba-abam5mc5.ap-southeast-1.elasticbeanstalk.com';
-	if (MERCHANTID > 1000 && MERCHANTID < 10000) {
-		endPointURL = 'gbox-env-2.ap-southeast-1.elasticbeanstalk.com';
-	}
 
-	var commonData = {
-		apiURL: 'https://'+getApiHost(0)+'/api/v1/index.php',
-		endPointURL: endPointURL,
-		ipapiURL: 'https://pro.ip-api.com/json/?key=aXn7IV0jBWzTsfN',
-		trackingURL: 'https://'+getApiHost(0)+'/mobile/component/tracking.html',
-		merchantId: MERCHANTID,
-		config: CONFIG,
-		currency: null,
-		siteName: null
-	};
+	// var commonData = {
+	// 	apiURL: 'https://'+getApiHost(0)+'/api/v1/index.php',
+	// 	endPointURL: endPointURL,
+	// 	ipapiURL: 'https://pro.ip-api.com/json/?key=aXn7IV0jBWzTsfN',
+	// 	trackingURL: 'https://'+getApiHost(0)+'/mobile/component/tracking.html',
+	// 	merchantId: MERCHANTID,
+	// 	config: CONFIG,
+	// 	currency: null,
+	// 	siteName: null
+	// };
 	
 	var jparse = JSON.parse;
 	JSON.parse = function(string) {
