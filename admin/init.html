@@ -14,11 +14,10 @@
 <body>
 <script>
 	var VERSION = {Version};
-	var ROOT = '{Root}';
 	var script = document.createElement('script');
 	script.setAttribute('type', 'text/javascript');
-	script.setAttribute('src', ROOT+'/admin/lib/require-2.1.15.min.js');
-	script.setAttribute('data-main', ROOT+'/admin/js/app.js?v='+VERSION);
+	script.setAttribute('src', '/admin/lib/require-2.1.15.min.js');
+	script.setAttribute('data-main', '/admin/js/app.js?v='+VERSION);
 	document.getElementsByTagName('head')[0].appendChild(script);
 </script>
 </body>
