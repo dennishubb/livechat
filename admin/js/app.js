@@ -2,22 +2,14 @@ require.config({
 	baseUrl: '.',
 	paths: {
 		jquery: '/admin/lib/jquery-1.11.2.min',
-		underscore: '/admin/lib/underscore-1.7.0.min',
 		backbone: '/admin/lib/backbone-1.1.2.min',
-		text: '/admin/lib/text-2.0.12',
 		views: '/admin/views'
 	},
 	deps: [
-		'/admin/js/common',
-		'/admin/lib/moment.min',
-		'/admin/lib/SMSCounter'
+		'/admin/js/common'
 	],
 	shim: {
-		'backbone': ['admin/js/common','jquery'],
-		'js/common': ['underscore'],
-		'plugins/simplePagination/simplePagination': ['jquery'],
-		'text':['jquery'],
-		'lib/SMSCounter':['jquery']
+		'backbone': ['admin/js/common','jquery']
 	},
 	urlArgs: 'v='+VERSION,
 	config: {
@@ -41,6 +33,10 @@ require.config({
 require(['backbone', 'js/router', 'views/main/main'], function(Backbone, Router, MainView) {
 	
 	Backbone.emulateJSON = true;
+
+	Backbone.View.prototype.goTo = function (fragment,options) {
+		Router.navigate(fragment,options);
+	};
 	
 	if (typeof cordova !== 'undefined') {
 		document.addEventListener('deviceready',function() {
