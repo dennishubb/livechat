@@ -45,61 +45,13 @@ define(function(require) {
 			
 			var self = this;
 			self.$el.html(self.template({}));
-			self.applyCSS();
-			self.$header = self.$el.find('#header');
-			self.$sidemenu = self.$el.find('#side-menu');
-			self.$content = self.$el.find('#content');
-			self.$popupwindow = self.$el.find('#popupwindow');
-			self.$loading = self.$el.find('#loading');
-			self.$adminNotice = self.$el.find('#admin-notice');
-
-			if (User.get('id') && User.get('token')) {
-				var completed = _.after(2, function() {
-					self.hardcodeAccess();
-					if (window.location.href.split('#').length === 1) {
-						var $href = self.$header.find('a[href]');
-						if ($href.length === 0) {
-							$href = self.$sidemenu.find('a[href]');
-						}
-						var href = $href.eq(0).attr('href');
-						if (href) {
-							window.location.href = href;
-						} else {
-							return;
-						}
-					}
-					Backbone.history.start();
-					self.showTimeZone();
-					self.showAdminNotice();
-					self.showAlertNotice();
-					self.checkPending();
-				});
-				$.post('/merchants/get', {includeSiteName:1}, function(data) {
-					_.setVar('merchant',data);
-					_.setVar('config',JSON.parse(data.config));
-					_.setVar('currency',data.currency);
-					_.setVar('siteName',data.siteName);
-					_.setVar('siteProduct',data.siteProduct);
-					_.getSiteGames(data.sites);
-					var color = _.conf('AdminThemeColor');
-					if (color) {
-						self.$header.css({'background-color':color});
-					}
-					completed();
-				});
-				self.getAdminUser(completed);
-			} else {
-				window.location.href = '#login';
-				Backbone.history.start();
-			}
-			
-			self.initMutationObserver();
-
-			self.sendUntranslatedText();
-			
-			self.$el.append('<iframe src="'+_.getVar('trackingURL')+'"></iframe>');
-			
-			self.$el.find('.change-language').val(_.getLocalStorage('LANGUAGE') || 'EN');
+			// self.applyCSS();
+			// self.$header = self.$el.find('#header');
+			// self.$sidemenu = self.$el.find('#side-menu');
+			// self.$content = self.$el.find('#content');
+			// self.$popupwindow = self.$el.find('#popupwindow');
+			// self.$loading = self.$el.find('#loading');
+			// self.$adminNotice = self.$el.find('#admin-notice');
 
 			return this;
 		},
