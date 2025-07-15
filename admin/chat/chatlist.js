@@ -1,8 +1,6 @@
 define(function(require) {
 	
 	var Backbone	= require('backbone'),
-		MainView	= require('views/main/main'),
-		User		= require('models/User'),
 		tpl			= require('text!views/chatlist/chatlist.html');
 	
 	return Backbone.View.extend({

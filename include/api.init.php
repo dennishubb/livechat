@@ -14,5 +14,9 @@
         if(isset($hash['error']))
             http_response(code:500, message:$hash['error']);
     });
+
+    if(!file_exists(ROOT.$url['path'].'.php')) exit('file not found');
+    $NOW = date('Y-m-d H:i:s');
+    include(ROOT.$url['path'].'.php');
     
 ?>
