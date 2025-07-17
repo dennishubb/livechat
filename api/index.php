@@ -17,6 +17,9 @@
             http_response(code:500, message:$hash['error']);
     });
 
+    $url = parse_url($_SERVER['REQUEST_URI']);
+    $path = explode('/', $url['path']);
+
     if(!file_exists(ROOT.$url['path'].'.php')) exit('file not found');
     $NOW = date('Y-m-d H:i:s');
     include(ROOT.$url['path'].'.php');
