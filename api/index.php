@@ -5,20 +5,10 @@
     if($req_token !== $token) http_response(code:403);
 
     define('ROOT', __DIR__);
-
-    require_once(ROOT.'/db/meekroDB_3.1.3.php');
-    require_once(ROOT.'/db/meekroORM_3.1.3.php');
-
-    DB::$dsn = 'mysql:host=172.31.30.41;dbname=chat';
-    DB::$user = 'chat_user';
-    DB::$password = 'hJz97Hy4z6Nv';
-    DB::addHook('post_run', function($hash) {
-        if(isset($hash['error']))
-            http_response(code:500, message:$hash['error']);
-    });
-
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $path = explode('/', $url['path']);
+    
+    require_once(ROOT.'/include/db.php');
+    require_once(ROOT.'/include/common.php');
+    require_once(ROOT.'/include/routes.php');
 
     if(!file_exists(ROOT.$url['path'].'.php')) exit('file not found');
     $NOW = date('Y-m-d H:i:s');
