@@ -1,7 +1,5 @@
 <?php
 
-    if($_REQUEST['REQUEST_METHOD'] !== 'GET') exit('invalid request');
-
     define(ROOT, __DIR__);
 
     include(ROOT.'/include/route.php');
