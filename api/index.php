@@ -4,7 +4,7 @@
     $req_token = trim(getallheaders()['X-Authorization-Key']);
     if($req_token !== $token) http_response(code:403);
 
-    define(ROOT, __DIR__);
+    define('ROOT', __DIR__);
 
     require_once(ROOT.'/db/meekroDB_3.1.3.php');
     require_once(ROOT.'/db/meekroORM_3.1.3.php');
