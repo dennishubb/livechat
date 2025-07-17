@@ -1,37 +1,5 @@
 <?php
 
-    function get_client_ip_server() {
-        $ip = '';
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-        } else if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED'];
-        } else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_FORWARDED_FOR'];
-        } else if (isset($_SERVER['HTTP_FORWARDED'])) {
-            $ip = $_SERVER['HTTP_FORWARDED'];
-        } else if (isset($_SERVER['REMOTE_ADDR'])) {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        $ip = explode(',', $ip)[0];
-        if (checkIP($ip)) {
-            return $ip;
-        } else {
-            return '0.0.0.0';
-        }
-    }
-
-    function checkIP($ip) {
-        if (filter_var($ip, FILTER_VALIDATE_IP)) {
-            return true;
-        }
-        return false;
-    }
-
     function captchaValidate() {
         // if (checkAccessIP(SUPPORTIP)) {
         //     return true;
@@ -142,7 +110,6 @@
     }
 
     function http_response($code = 200, $message = '', $data = array()){
-
         if(!$message){
             $message = match($code){
                 200 => 'Success',
