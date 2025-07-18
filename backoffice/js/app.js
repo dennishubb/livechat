@@ -18,7 +18,7 @@ require.config({
 		},
 		backbone: {
 			deps: [ 'underscore', 'jquery', 'js/common'],
-			exports: 'Backbone'
+			exports: 'backbone'
 		},
 		'js/common': ['underscore'],
 		'lib/simplePagination/simplePagination': ['jquery'],
