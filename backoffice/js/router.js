@@ -15,5 +15,7 @@ const route_path = function() {
 		}
 	}
 
+	console.log(path);
+
 	return path;
 };
