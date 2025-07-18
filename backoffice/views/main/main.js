@@ -69,7 +69,7 @@ define(function(require) {
 			// 	});
 			// 	self.getAdminUser(completed);
 			// } else {
-			// 	window.location.href = '#login';
+				window.location.href = '#chatlist';
 				Backbone.history.start();
 			// }
 			
