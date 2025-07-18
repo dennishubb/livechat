@@ -28,10 +28,7 @@ require.config({
 
 require(['jquery', 'underscore'], function($) {
 	$(function() {
-	
 		console.log('init');
-	
 		$("#init").load('../views/main/main.html');
-	
 	});
 });
