@@ -5,7 +5,8 @@ require.config({
 		underscore: 'lib/underscore.min',
 		backbone: 'lib/backbone',
 		text: 'lib/text',
-		views: 'views'
+		views: 'views',
+		router: 'js/router'
 	},
 	deps: [
 		'js/common',
@@ -26,9 +27,15 @@ require.config({
 	},
 });
 
-require(['jquery', 'underscore'], function($) {
+require(['jquery', 'router'], function($, router) {
 	$(function() {
 		console.log('init');
 		$("#init").load('../views/main/main.html');
+		$("#content").load(function(){
+			var html = router.route_path;
+			console.log("routing html");
+			console.log(html);
+			return '';
+		})
 	});
 });
