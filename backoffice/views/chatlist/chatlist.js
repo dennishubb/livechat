@@ -1,6 +1,7 @@
 define(function(require) {
 	
 	var Backbone	= require('backbone'),
+		_			= require('underscore'),
 		MainView	= require('views/main/main'),
 		tpl			= require('text!views/chatlist/chatlist.html');
 	

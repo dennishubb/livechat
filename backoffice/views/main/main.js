@@ -1,8 +1,7 @@
 define(function(require) {
-
-	console.log("main");
 	
 	var Backbone		= require('backbone'),
+		_				= require('underscore'),
 		Access			= require('js/Access'),
 		EditorView		= require('views/main/editor/editor'),
 		// TwofaView		= require('views/main/twofa/twofa'),
@@ -14,12 +13,6 @@ define(function(require) {
 		el: 'body',
 		
 		initialize: function(options) {
-
-			// console.log("main init");
-			
-
-			// const _ = require('underscore');
-			// console.log(_);
 			
 			this.template = _.template(tpl);
 			this.contentView = null;

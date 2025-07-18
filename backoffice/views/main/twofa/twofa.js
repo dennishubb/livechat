@@ -1,6 +1,7 @@
 define(function(require) {
 	
 	var Backbone	= require('backbone'),
+	    _			= require('underscore'),
 		tpl			= require('text!views/main/twofa/twofa.html');
 	
 	return Backbone.View.extend({
