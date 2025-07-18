@@ -3,7 +3,7 @@ define(function(require) {
 	var Backbone		= require('backbone'),
 		_				= require('underscore'),
 		Access			= require('js/Access'),
-		EditorView		= require('views/main/editor/editor'),
+		// EditorView		= require('views/main/editor/editor'),
 		// TwofaView		= require('views/main/twofa/twofa'),
 		tpl				= require('text!views/main/main.html'),
 		cssA			= require('text!views/main/cssA.html');
@@ -415,7 +415,7 @@ define(function(require) {
 		},
 
 		editor: function(data){
-			new EditorView(data).render();
+			// new EditorView(data).render();
 		},
 
 		showAlertNotice: function() {

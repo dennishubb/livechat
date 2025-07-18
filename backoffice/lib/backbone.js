@@ -17,8 +17,6 @@
       define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
         // Export global even in AMD case in case this script is loaded with
         // others that may still expect a global Backbone.
-        console.log("define underscore?");
-        console.log(_);
         root.Backbone = factory(root, exports, _, $);
       });
   
@@ -27,11 +25,9 @@
       var _ = require('underscore'), $;
       try { $ = require('jquery'); } catch (e) {}
       factory(root, exports, _, $);
-      console.log("define underscore 2?");
   
     // Finally, as a browser global.
     } else {
-        console.log("define underscore 3?");
       root.Backbone = factory(root, {}, root._, root.jQuery || root.Zepto || root.ender || root.$);
     }
   
