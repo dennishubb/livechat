@@ -1,5 +1,7 @@
 <?php
 
-    route404();
+    // route404();
+
+    include(ROOT.'/views/chat/chats.php');
 
 ?>
