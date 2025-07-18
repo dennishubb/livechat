@@ -17,6 +17,7 @@
     $html = file_get_contents(ROOT.'/views/init.html');
     include($parse);
 
+    $html = $html.$parse_html;
     exit($html);
 
     function route404(){

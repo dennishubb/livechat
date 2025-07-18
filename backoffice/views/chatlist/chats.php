@@ -1,5 +1,5 @@
 <?php
 
-    echo "<script src='/views/chatlist/chatlist.js' type='text/javascript'></script>";
+    $parse_html = "<script src='/views/chatlist/chatlist.js' type='text/javascript'></script>";
 
 ?>
