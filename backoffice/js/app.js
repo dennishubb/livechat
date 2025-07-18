@@ -32,7 +32,7 @@ require(['jquery', 'underscore'], function($, _) {
 		console.log('init');
 		//initialize styles and html
 		const _ = require('underscore');
-		var mainview = _.template('views/main/main.html');
+		var mainview = _.template('text!views/main/main.html');
 	
 		$("#init").append(mainview);
 	
