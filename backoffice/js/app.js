@@ -26,15 +26,12 @@ require.config({
 	},
 });
 
-require(['jquery', 'underscore'], function($, _) {
+require(['jquery', 'underscore'], function($) {
 	$(function() {
 	
 		console.log('init');
-		//initialize styles and html
-		const _ = require('underscore');
-		var mainview = _.template('text!views/main/main.html');
 	
-		$("#init").append(mainview);
+		$("#init").load('../views/main/main.html');
 	
 	});
 });
