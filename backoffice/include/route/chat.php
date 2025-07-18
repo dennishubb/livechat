@@ -1,7 +1,7 @@
 <?php
 
     // route404();
-    
-    include(ROOT.'/views/chat/chats.php');
+
+    include(ROOT.'/views/chatlist/chats.php');
 
 ?>
