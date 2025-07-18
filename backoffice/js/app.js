@@ -2,16 +2,21 @@ require.config({
 	baseUrl: '.',
 	paths: {
 		jquery: 'lib/jquery.min',
+		underscore: 'lib/underscore.min',
 		backbone: 'lib/backbone',
+		text: 'lib/text',
 		views: 'views'
 	},
 	deps: [
 		'js/common',
 		'lib/moment.min',
+		'lib/simplePagination/simplePagination'
 	],
 	shim: {
 		'backbone': ['js/common','jquery'],
-		'text':['jquery'],
+		'js/common': ['underscore'],
+		'lib/simplePagination/simplePagination': ['jquery'],
+		'text':['jquery']
 	},
 	urlArgs: 'v='+VERSION,
 	config: {
