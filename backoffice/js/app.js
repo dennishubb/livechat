@@ -13,9 +13,6 @@ require.config({
 		'lib/simplePagination/simplePagination'
 	],
 	shim: {
-		underscore: {
-			exports: '_'
-		},
 		backbone: {
 			deps: ['js/common', 'jquery', 'underscore'],
 			exports: 'Backbone'
