@@ -23,16 +23,18 @@ require.config({
 		'js/common': ['underscore'],
 		'lib/simplePagination/simplePagination': ['jquery'],
 		'text':['jquery']
-	}
+	},
 });
 
-$(function() {
+require(['jquery'], function($) {
+	$(function() {
 	
-	console.log('init');
-	//initialize styles and html
-	const _ = require('underscore');
-	var mainview = _.template('views/main/main.html');
-
-	$("#init").append(mainview);
-
+		console.log('init');
+		//initialize styles and html
+		const _ = require('underscore');
+		var mainview = _.template('views/main/main.html');
+	
+		$("#init").append(mainview);
+	
+	});
 });
