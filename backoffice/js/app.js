@@ -32,7 +32,7 @@ require(['jquery'], function($, router) {
 		console.log('init');
 		$("#init").load('../views/main/main.html');
 		$("#content").load(function(){
-			var html = router.route_path;
+			var html = router.route_path();
 			console.log("routing html");
 			console.log(html);
 			return '';
