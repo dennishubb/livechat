@@ -9,6 +9,8 @@
 
     $html = file_get_contents(ROOT.'/views/init.html');
 
-    include(ROOT.'/include/route.php');
+    echo($html);
+
+    // include(ROOT.'/include/route.php');
 
 ?>
