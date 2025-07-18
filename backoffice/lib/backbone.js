@@ -18,6 +18,7 @@
         // Export global even in AMD case in case this script is loaded with
         // others that may still expect a global Backbone.
         console.log("define underscore?");
+        console.log(_);
         root.Backbone = factory(root, exports, _, $);
       });
   
