@@ -404,13 +404,13 @@ define(function(require) {
 		},
 		
 		applyCSS: function() {
-			if (_.config('AdminPageCSS') && (!User.get('role') || User.get('role') == 'KOUNTER')) {
+			// if (_.config('AdminPageCSS') && (!User.get('role') || User.get('role') == 'KOUNTER')) {
 				var style = document.createElement('style');
 				style.id = 'cssA';
 				style.type = 'text/css';
 				style.innerHTML = cssA;
 				document.getElementsByTagName("head")[0].appendChild(style);
-			}
+			// }
 		},
 
 		editor: function(data){
