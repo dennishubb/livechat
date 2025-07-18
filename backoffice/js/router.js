@@ -1,10 +1,8 @@
 console.log('router');
 
-function route_path() {
+const route_path = function() {
 	console.log('route path');
 	var path = location.pathname.split("/");
 
 	return path;
-}
-
-exports.route_path = route_path;
+};
