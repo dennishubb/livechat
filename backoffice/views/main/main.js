@@ -1,4 +1,6 @@
 define(function(require) {
+
+	console.log("main");
 	
 	var Backbone		= require('backbone'),
 		Access			= require('js/Access'),
@@ -12,6 +14,8 @@ define(function(require) {
 		el: 'body',
 		
 		initialize: function(options) {
+
+			console.log("main init");
 			
 			this.template = _.template(tpl);
 			this.contentView = null;
