@@ -44,7 +44,7 @@ require.config({
 	}
 });
 
-require(['backbone', 'js/router', 'views/main/main'], function(Backbone, Router, MainView) {
+require(['backbone', 'underscore', 'js/router', 'views/main/main'], function(Backbone, _, Router, MainView) {
 	
 	Backbone.emulateJSON = true;
 
