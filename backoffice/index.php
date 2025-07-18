@@ -7,7 +7,7 @@
 
     // $main_html = file_get_contents(ROOT.'/views/main/main.html');
 
-    $html = file_get_contents(ROOT.'/');
+    $html = file_get_contents(ROOT.'/init.html');
 
     exit($html);
 
