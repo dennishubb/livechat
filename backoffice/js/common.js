@@ -23,25 +23,26 @@ define(['lib/sweetalert2.all.min','lib/Autolinker.min','js/Access'], function(sw
 		return data;
 	};
 
-	var ohtml = $.fn.html;
-	var otext = $.fn.text;
-	var oappend = $.fn.append;
-	$.fn.html = function(a) {
-		if (typeof a === 'string') {
-			a = tx(a);
-		}
-		return ohtml.apply(this, arguments);
-	};
-	$.fn.text = function(a) {
-		if (typeof a === 'string') {
-			a = tx(a);
-		}
-		return otext.apply(this, arguments);
-	};
-	$.fn.append = function(a) {
-		if (typeof a === 'string') {
-			a = tx(a);
-		}
-		return oappend.apply(this, arguments);
-	};
+	//seems to be translate function
+	// var ohtml = $.fn.html;
+	// var otext = $.fn.text;
+	// var oappend = $.fn.append;
+	// $.fn.html = function(a) {
+	// 	if (typeof a === 'string') {
+	// 		a = tx(a);
+	// 	}
+	// 	return ohtml.apply(this, arguments);
+	// };
+	// $.fn.text = function(a) {
+	// 	if (typeof a === 'string') {
+	// 		a = tx(a);
+	// 	}
+	// 	return otext.apply(this, arguments);
+	// };
+	// $.fn.append = function(a) {
+	// 	if (typeof a === 'string') {
+	// 		a = tx(a);
+	// 	}
+	// 	return oappend.apply(this, arguments);
+	// };
 });
