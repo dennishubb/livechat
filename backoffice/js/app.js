@@ -13,7 +13,7 @@ require.config({
 		'lib/simplePagination/simplePagination'
 	],
 	shim: {
-		'backbone': ['js/common','jquery'],
+		'backbone': ['js/common','jquery', 'underscore'],
 		'js/common': ['underscore'],
 		'lib/simplePagination/simplePagination': ['jquery'],
 		'text':['jquery']
