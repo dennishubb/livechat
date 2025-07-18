@@ -4,7 +4,7 @@ define(function(require) {
 
 	var v = {};
 
-	v['chat'] = require('views/chat/chat');
+	v['chat'] = require('views/chatlist/chatlist');
 
 	var Router = Backbone.Router.extend({
 		routes: _.extend(_.object(_.keys(v),_.keys(v)),{'*notfound':'notfound'})
