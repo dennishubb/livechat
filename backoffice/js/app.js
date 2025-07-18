@@ -26,7 +26,7 @@ require.config({
 	},
 });
 
-require(['jquery'], function($) {
+require(['jquery', 'underscore'], function($, _) {
 	$(function() {
 	
 		console.log('init');
