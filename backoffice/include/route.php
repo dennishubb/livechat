@@ -9,14 +9,13 @@
     //backoffice.livechat.com/chat/{token}/message/{chat_id} << return chat messages
 
     $route = '';
-    switch($path[1]){
-        case 'chat':
-            include(ROOT.'/include/route_parse/chat.php');
-            break;
-        default:
-            route404();
-            break;
-    }
+    $parse = match ($path[1]) {
+        'chat' => ROOT.'/include/route_parse/chat.php',
+        default => route404(),
+    };
+
+    $main_html = file_get_contents(ROOT.'/views/main/main.html');
+    include($parse);
 
     function route404(){
         include(ROOT.'/views/errors/404.php');

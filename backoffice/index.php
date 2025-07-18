@@ -7,10 +7,8 @@
 
     // $main_html = file_get_contents(ROOT.'/views/main/main.html');
 
-    $html = file_get_contents(ROOT.'/init.html');
+    $html = file_get_contents(ROOT.'/views/init.html');
 
-    exit($html);
-
-    // include(ROOT.'/include/route.php');
+    include(ROOT.'/include/route.php');
 
 ?>
