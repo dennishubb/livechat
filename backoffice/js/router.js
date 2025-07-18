@@ -1,8 +1,19 @@
-console.log('router');
-
 const route_path = function() {
-	console.log('route path');
 	var path = location.pathname.split("/");
-	console.log(path);
+
+	if(typeof path[1] === 'undefined') {
+		path = '/views/errors/404.html';
+	}
+	else {
+		switch(path[1]){
+			case 'chat':
+				path = '/views/chatlist/chatlist.html';
+				break;
+			default:
+				path = '/views/errors/404.html';
+				break;
+		}
+	}
+
 	return path;
 };
