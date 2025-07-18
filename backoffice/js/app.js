@@ -31,11 +31,7 @@ require(['jquery'], function($, router) {
 	$(function() {
 		console.log('init');
 		$("#init").load('../views/main/main.html');
-		$("#content").load(function(){
-			var html = router.route_path();
-			console.log("routing html");
-			console.log(html);
-			return '';
-		})
+		$html = router.route_path();
+		$("#content").load($html)
 	});
 });
