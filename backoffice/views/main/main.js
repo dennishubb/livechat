@@ -16,9 +16,10 @@ define(function(require) {
 		initialize: function(options) {
 
 			console.log("main init");
-			console.log(_);
+			
 
 			const _ = require('underscore');
+			console.log(_);
 			
 			this.template = _.template(tpl);
 			this.contentView = null;
