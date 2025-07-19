@@ -29,6 +29,7 @@ body{
 	  display: inline-block;
 	  padding-right: 12px;
 	  animation: type .5s alternate infinite;
+      color: black;
 }
 
 @keyframes type{
