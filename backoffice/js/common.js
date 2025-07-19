@@ -1,6 +1,5 @@
 define(['lib/sweetalert2.all.min','lib/Autolinker.min','js/Access'], function(swal,Autolinker,Access) {
 
-	console.log("common");
 	// var commonData = {
 	// 	apiURL: 'https://'+getApiHost(0)+'/api/v1/index.php',
 	// 	endPointURL: endPointURL,
