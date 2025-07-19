@@ -31,9 +31,8 @@ require(['jquery', 'router'], function($, router) {
 	$(function() {
 		console.log('init');
 		$("#init").load('../views/main/main.html', function(data){
-			console.log("data");
-			console.log(data);
-			//$("#content").load(route_path())
+			$("#init").html(data);
+			// $("#content").load(route_path())
 		});
 	});
 });
