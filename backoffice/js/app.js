@@ -30,9 +30,8 @@ require.config({
 require(['jquery', 'router'], function($, router) {
 	$(function() {
 		console.log('init');
-		$("#init").load('../views/main/main.html', function(data){
-			$("#init").html(data);
-			// $("#content").load(route_path())
+		$("#init").load('../views/main/main.html', function(){
+			$("#content").load(route_path())
 		});
 	});
 });
