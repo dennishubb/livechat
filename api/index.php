@@ -1,5 +1,6 @@
 <?php
 
+    echo getallheaders();
     header('Access-Control-Allow-Origin: http://backoffice.livechat.com');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Authorization-Key');
