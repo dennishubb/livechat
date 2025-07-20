@@ -54,9 +54,9 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			// }
 			console.log('sortList');
 			chats = _.sortBy(chats, function(m) {
-				if (self.chatStatus(m) === 'pinned') {
+				if (chatStatus(m) === 'pinned') {
 					return 'pinned';
-				} else if (self.chatStatus(m) === 'yellow') {
+				} else if (chatStatus(m) === 'yellow') {
 					return 'yellow';
 				}
 			});
