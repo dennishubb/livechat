@@ -34,6 +34,10 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 			$('.wrapper').html(h);
 		});
+
+		function render(){
+
+		}
 	
 		function sortList(chats) {
 			// self = this;
@@ -111,41 +115,37 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		// 	var btn = $('.chat-sound');
 		// 	playSound === 'off' ? btn.text('Sound Off') : btn.text('Sound On');
 		// },
-	
-		// events: {
-		// 	'click .pin-type': function(e) {
-		// 		var self = this;
-		// 		var $this = $(e.currentTarget);
-		// 		$this.addClass('selected').siblings().removeClass('selected');
-		// 		self.pintype = $this.data('type');
-		// 		_.setLocalStorage('PINTYPE',self.pintype);
-		// 		self.renderList();
-		// 	},
-		// 	'click .pin': function(e) {
-		// 		var self = this;
-		// 		e.stopPropagation();
-		// 		e.preventDefault();
-		// 		var $this = $(e.currentTarget);
-		// 		var mamId = parseInt($this.closest('a.chat').data('mam-id')) || '';
-		// 		var userId = parseInt($this.closest('a.chat').data('id'));
-		// 		var setPin = $this.data('setpin');
-		// 		if (mamId && userId) {
-		// 			$.post('/chat/pin', {mamId:mamId,userId:userId,setPin:setPin}, function () {
-		// 				self.maCreatedDateTime[mamId] = '';
-		// 				self.getChats();
-		// 			});
-		// 		}
-		// 	},
-		// 	'click .chat-sound': function(e) {
-		// 		var $this = $(e.currentTarget);
-		// 		if (_.getLocalStorage('CHATSOUND') === 'off') {
-		// 			$this.text('Sound On');
-		// 			_.setLocalStorage('CHATSOUND','on');
-		// 		} else {
-		// 			$this.text('Sound Off');
-		// 			_.setLocalStorage('CHATSOUND','off');
-		// 		}
-		// 	}
-		// }
+
+		$(".pin_type").click(function(){
+			var $this = $(e.currentTarget);
+			$this.addClass('selected').siblings().removeClass('selected');
+			_.setLocalStorage('PINTYPE', $this.data('type'));
+		});
+
+		$(".pin").click(function(){
+			e.stopPropagation();
+			e.preventDefault();
+			var $this = $(e.currentTarget);
+			var mamId = parseInt($this.closest('a.chat').data('mam-id')) || '';
+			var userId = parseInt($this.closest('a.chat').data('id'));
+			var setPin = $this.data('setpin');
+			if (mamId && userId) {
+				$.post('/chat/pin', {mamId:mamId,userId:userId,setPin:setPin}, function () {
+					self.maCreatedDateTime[mamId] = '';
+					self.getChats();
+				});
+			}
+		});
+
+		$('.chat-sound').click(function(){
+			var $this = $(e.currentTarget);
+			if (_.getLocalStorage('CHATSOUND') === 'off') {
+				$this.text('Sound On');
+				_.setLocalStorage('CHATSOUND','on');
+			} else {
+				$this.text('Sound Off');
+				_.setLocalStorage('CHATSOUND','off');
+			}	
+		});
 	});
 });
