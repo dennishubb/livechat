@@ -24,7 +24,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 				} else {
 					displayTime = displayTime.format('D MMM');
 				}
-				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+'" href="chat/'+TOKEN+'/messages/'+m.id+'">'+
+				//href="chat/'+TOKEN+'/messages/'+m.id+'
+				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+'">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
