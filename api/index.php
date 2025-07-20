@@ -4,12 +4,14 @@
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, x-authorization-key');
 
-    if($_SERVER['REQUEST_METHOD'] !== 'OPTIONS'){
-        $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
-        $req_token = trim(getallheaders()['x-authorization-key']);
-        if($req_token !== $token) http_response(code:403);
+    if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
+        exit();
     }
 
+    $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
+    $req_token = trim(getallheaders()['x-authorization-key']);
+    if($req_token !== $token) http_response(code:403);
+    
     define('ROOT', __DIR__);
 
     require_once(ROOT.'/include/db.php');
