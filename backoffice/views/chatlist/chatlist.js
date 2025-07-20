@@ -8,6 +8,7 @@ require(['jquery', 'underscore'], function($,_){
 		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
 			console.log('chats/get');
 			console.log(response);
+			console.log(response.status);
 			// data = _.filter(data, function(c){ return c.user && c.user.id; });
 			if (!(response.data && response.data.length)) {
 				console.log('no data?');
