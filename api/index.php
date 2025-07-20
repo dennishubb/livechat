@@ -2,11 +2,11 @@
 
     header('Access-Control-Allow-Origin: http://backoffice.livechat.com');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Authorization-Key');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, x-authorization-key');
 
-    // $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
-    // $req_token = trim(getallheaders()['X-Authorization-Key']);
-    // if($req_token !== $token) http_response(code:403);
+    $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
+    $req_token = trim(getallheaders()['x-authorization-key']);
+    if($req_token !== $token) http_response(code:403);
 
     define('ROOT', __DIR__);
 

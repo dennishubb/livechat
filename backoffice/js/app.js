@@ -35,13 +35,9 @@ require(['jquery', 'router'], function($, router) {
 		});
 
 		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-			
-			options.beforeSend = function(xhr) {
-				console.log("PREFILTER");
-				xhr.setRequestHeader('X-Authorization-Key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
-				console.log(xhr);
-			}
-			
+			console.log("PREFILTER");
+			console.log(options);
+			xhr.setRequestHeader('x-authorization-key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
 		});
 	});
 });
