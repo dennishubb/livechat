@@ -15,6 +15,7 @@ $(function() {
 		var today = moment().format('D MMM YYYY');
 		var h = '';
 		_.each(sortList(chats), function(m) {
+			console.log(m);
 			// if (self.pintype !== 'ALL' && self.pintype !== parseInt(m.pinned)) {
 			// 	return;
 			// }
