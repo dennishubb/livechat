@@ -54,6 +54,7 @@ require(['jquery', 'underscore'], function($,_){
 			// 		return a[s]+b;
 			// 	});
 			// }
+			console.log('sortList');
 			chats = _.sortBy(chats, function(m) {
 				if (self.chatStatus(m) === 'pinned') {
 					return 'pinned';
@@ -65,6 +66,7 @@ require(['jquery', 'underscore'], function($,_){
 		};
 		
 		function chatStatus(m) {
+			console.log('chatstatus');
 			if (parseInt(m.pinned)) {
 				if (m.last_message_user_id !== m.user_id) {
 					return 'pinned';
