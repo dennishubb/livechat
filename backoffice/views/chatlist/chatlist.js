@@ -28,7 +28,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+'">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
-						'<p class="text">'+m.message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
+						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
 						'<i class="fa fa-exclamation-circle exclamation"></i>'+
 						'<span class="pin" data-setpin="'+(m.pinned ? 0 : 1)+'">PIN</span>'+
 					'</a>';
