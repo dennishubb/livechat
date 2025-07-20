@@ -5,15 +5,15 @@ require(['jquery', 'underscore'], function($,_){
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 	
 		var request = {'merchant_id':5};
-		$.post('http://api.livechat.com/v1/chats/get', request, function(data){
+		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
 			console.log('chats/get');
-			console.log(data);
+			console.log(response);
 			// data = _.filter(data, function(c){ return c.user && c.user.id; });
-			if (!(data.data && data.data.length)) {
+			if (!(response.data && response.data.length)) {
 				console.log('no data?');
 				return;
 			}
-			var chats = data.data;
+			var chats = response.data;
 			var today = moment().format('D MMM YYYY');
 			var h = '';
 			_.each(sortList(chats), function(m) {
