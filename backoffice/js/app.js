@@ -37,7 +37,7 @@ require(['jquery', 'router'], function($, router) {
 		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 			console.log("PREFILTER");
 			console.log(options);
-			xhr.setRequestHeader('x-authorization-key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
+			jqXHR.setRequestHeader('x-authorization-key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
 		});
 	});
 });
