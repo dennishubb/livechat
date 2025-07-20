@@ -10,6 +10,7 @@ require(['jquery', 'underscore'], function($,_){
 			console.log(data);
 			// data = _.filter(data, function(c){ return c.user && c.user.id; });
 			if (!(data.data && data.data.length)) {
+				console.log('no data?');
 				return;
 			}
 			var chats = data.data;
