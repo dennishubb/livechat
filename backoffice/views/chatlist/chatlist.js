@@ -1,7 +1,5 @@
-require(['jquery', 'underscore'], function($,_){
+require(['jquery', 'underscore', 'moment'], function($,_,moment){
 	$(function() {
-		const _ = require('underscore');
-	
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 	
 		var request = {'merchant_id':5};
