@@ -13,7 +13,8 @@
     DB::insert('debug', ['text' => json_encode(getallheaders())]);
 
     $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
-    $req_token = trim(getallheaders()['x-authorization-key']);
+    $headers = getallheaders();
+    $req_token = trim(isset($headers['x-authorization-key']) ? $headers['x-authorization-key']:$headers['X-Authorization-Key']);
     if($req_token !== $token) http_response(code:403);
 
     if(!file_exists(ROOT.$url['path'].'.php')) exit('file not found');
