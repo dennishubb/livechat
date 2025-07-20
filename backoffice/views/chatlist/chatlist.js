@@ -1,6 +1,6 @@
-const { forEach } = require("underscore");
-
 $(function() {
+	const _ = require('underscore');
+
 	$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 
 	var request = {'merchant_id':5};
