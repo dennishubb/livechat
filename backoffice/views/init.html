@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="http://backoffice.livechat.com" target="_blank">
 <title>LIVECHAT</title>
 <meta charset="utf-8">
 <meta name="format-detection" content="telephone=no">
@@ -11,10 +12,11 @@
 <body id="init">
 <script>
     var VERSION = 1;
+    var BASEURL = window.location.origin;
 	var script = document.createElement('script');
 	script.setAttribute('type','text/javascript');
-	script.setAttribute('src','../lib/require.js');
-	script.setAttribute('data-main','../js/app.js?v='+VERSION);
+	script.setAttribute('src',BASEURL+'/lib/require.js');
+	script.setAttribute('data-main',BASEURL+'/js/app.js?v='+VERSION);
 	document.getElementsByTagName('head')[0].appendChild(script);
 </script>
 </body>
