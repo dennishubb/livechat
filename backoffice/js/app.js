@@ -6,8 +6,7 @@ require.config({
 		backbone: 'lib/backbone',
 		text: 'lib/text',
 		views: 'views',
-		router: 'js/router',
-		moment: 'lib/moment.min'
+		router: 'js/router'
 	},
 	deps: [
 		'js/common',
