@@ -6,15 +6,13 @@ require(['jquery', 'underscore'], function($,_){
 	
 		var request = {'merchant_id':5};
 		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
-			console.log('chats/get');
-			console.log(response);
-			console.log(response.status);
+			const resp = JSON.parse(response);
 			// data = _.filter(data, function(c){ return c.user && c.user.id; });
-			if (!(response.data && response.data.length)) {
+			if (!(resp.data && resp.data.length)) {
 				console.log('no data?');
 				return;
 			}
-			var chats = response.data;
+			var chats = resp.data;
 			var today = moment().format('D MMM YYYY');
 			var h = '';
 			_.each(sortList(chats), function(m) {
