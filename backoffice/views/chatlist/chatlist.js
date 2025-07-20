@@ -5,9 +5,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		var request = {'merchant_id':5};
 		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
 			const resp = JSON.parse(response);
-			// data = _.filter(data, function(c){ return c.user && c.user.id; });
 			if (!(resp.data && resp.data.length)) {
-				console.log('no data?');
 				return;
 			}
 			var chats = resp.data;
@@ -25,7 +23,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 					displayTime = displayTime.format('D MMM');
 				}
 				//href="chat/'+TOKEN+'/messages/'+m.id+'
-				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+'">'+
+				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+' href="chat/'+m.merchant_id+'/messages/'+m.id+'">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+

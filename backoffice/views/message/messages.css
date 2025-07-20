@@ -1,11 +1,11 @@
-#chatroom {
+#messages {
 	position: relative;
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
 	background: #FFEBEE;
 }
-#chatroom .actions {
+#messages .actions {
     background: #ccc;
     font-size: 13px;
     line-height: 24px;
@@ -16,21 +16,21 @@
 	width: 100%;
 	overflow: auto;
 }
-#chatroom .actions a {
+#messages .actions a {
     color: #00f;
     text-decoration: underline;
     margin-right: 5px;
     float: right;
 }
-#chatroom .actions a:first-child {
+#messages .actions a:first-child {
     float: left;
     margin-left: 5px;
 	text-transform: uppercase;
 }
-#chatroom .actions a.pin {
+#messages .actions a.pin {
     display: none;
 }
-#chatroom .scrollable {
+#messages .scrollable {
 	position: relative;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -38,25 +38,25 @@
 	height: calc(100% - 135px);
 }
 @media only screen and (max-width: 1400px) {
-	#chatroom .scrollable {
+	#messages .scrollable {
 		height: calc(100% - 160px);
 	}
 }
-#chatroom .wrapper {
+#messages .wrapper {
 	position: relative;
 	overflow: hidden;
 }
 @media only screen and (max-width: 800px) {
-	#chatroom .wrapper {
+	#messages .wrapper {
 		padding-bottom: 4%;
 	}
 }
 @media only screen and (max-width: 700px) {
-	#chatroom .wrapper {
+	#messages .wrapper {
 		padding-bottom: 8%;
 	}
 }
-#chatroom .message {
+#messages .message {
 	position: relative;
 	overflow: hidden;
 	background: #fff;
@@ -64,36 +64,36 @@
 	padding: 8px;
 	border: 1px solid #FFCDD2;
 }
-#chatroom .message .time {
+#messages .message .time {
 	float: right;
 	font-size: 13px;
 }
-#chatroom .message .name {
+#messages .message .name {
 	font-weight: 700;
 	font-size: 13px;
 	color: #3F51B5;
 }
-#chatroom .message.myself .name {
+#messages .message.myself .name {
 	color: #009688;
 }
-#chatroom .message.staff .name {
+#messages .message.staff .name {
 	color: #F44336;
 }
-#chatroom .message .name .profile {
+#messages .message .name .profile {
 	cursor: pointer;
 	text-transform: uppercase;
 }
-#chatroom .message .name .profile i {
+#messages .message .name .profile i {
 	margin-right: 3px;
 }
-#chatroom .message .text {
+#messages .message .text {
 	margin: 5px 80px 0 0;
 }
-#chatroom .message .text a {
+#messages .message .text a {
 	color: #3F51B5;
 	text-decoration: underline;
 }
-#chatroom .message .delete {
+#messages .message .delete {
 	font-size: 11px;
     padding: 1px 4px 0;
     border-radius: 3px;
@@ -102,16 +102,16 @@
     margin-top: -3px;
     margin-left: 5px;
 }
-#chatroom .message img {
+#messages .message img {
 	max-width: 150px;
 	max-height: 150px;
 	margin-top: 5px;
 	cursor: pointer;
 }
-#chatroom .message audio {
+#messages .message audio {
 	display: block;
 }
-#chatroom .message .channel {
+#messages .message .channel {
 	position: absolute;
 	font-size: 11px;
 	background: #ccc;
@@ -121,39 +121,39 @@
 	top: 30px;
 	right: 5px;
 }
-#chatroom .message .channel.LIVECHAT {
+#messages .message .channel.LIVECHAT {
 	background: #BBDEFB;
 }
-#chatroom .message .channel.WHATSAPP, #chatroom .message .channel.LINE {
+#messages .message .channel.WHATSAPP, #messages .message .channel.LINE {
 	background: #A5D6A7;
 }
-#chatroom .message .channel.SMS {
+#messages .message .channel.SMS {
 	background: #80DEEA;
 }
-#chatroom .message .channel.VIBER {
+#messages .message .channel.VIBER {
 	background: #b39ddb;
 }
-#chatroom .message .channel.TELEGRAM {
+#messages .message .channel.TELEGRAM {
 	background: #4fc3f7;
 }
-#chatroom .message .channel.TELEGRAM.SKIPPED {
+#messages .message .channel.TELEGRAM.SKIPPED {
 	background: #ccc;
 }
-#chatroom .chat-tools {
+#messages .chat-tools {
 	position: absolute;
 	overflow: hidden;
 	width: 100%;
 	bottom:0;
 	box-shadow: 0 0 3px rgba(0,0,0,0.8);
 }
-#chatroom .chat-tools textarea {
+#messages .chat-tools textarea {
 	float: left;
 	width: calc(100% - 50px);
 	height: 110px;
 	border: 0;
 	resize: none;
 }
-#chatroom .chat-tools .tool {
+#messages .chat-tools .tool {
 	background: #009688;
 	float: left;
 	color: #fff;
@@ -163,17 +163,17 @@
 	font-size: 25px;
 	cursor: pointer;
 }
-#chatroom .chat-tools .tool.file {
+#messages .chat-tools .tool.file {
 	background: #3F51B5;
 }
-#chatroom .chat-tools .tool.whatsapp {
+#messages .chat-tools .tool.whatsapp {
 	background: #4caf50;
 	display: none;
 }
-#chatroom .chat-tools .tool.file input {
+#messages .chat-tools .tool.file input {
 	display: none;
 }
-#chatroom .chat-tools select {
+#messages .chat-tools select {
 	position: absolute;
 	top: 0px;
 	right: 50px;
@@ -184,18 +184,18 @@
 	border: 0;
 	cursor: pointer;
 }
-#chatroom .chat-tools.typing select {
+#messages .chat-tools.typing select {
 	z-index: -1;
 }
-#chatroom .chat-tools .shortcuts {
+#messages .chat-tools .shortcuts {
 	position: absolute;
 	width: calc(100% - 180px);
 	display: none;
 }
-#chatroom .chat-tools.typing .shortcuts, #chatroom .chat-tools.focus .shortcuts {
+#messages .chat-tools.typing .shortcuts, #messages .chat-tools.focus .shortcuts {
 	z-index: -1;
 }
-#chatroom .chat-tools .shortcuts .shortcut {
+#messages .chat-tools .shortcuts .shortcut {
 	background: #4caf50;
 	color: #fff;
 	font-size: 13px;
@@ -205,13 +205,13 @@
 	white-space: nowrap;
 	padding: 2px 5px;
 }
-#chatroom .voice {
+#messages .voice {
 	position: absolute;
 	bottom: 0px;
 	right: 50px;
 	display: none;
 }
-#chatroom .voice a {
+#messages .voice a {
 	background: #2196f3;
 	color: #fff;
 	float: left;
@@ -222,12 +222,12 @@
 	border-radius: 100%;
 	margin: 0px 5px 5px 0px;
 }
-#chatroom .voice a.voicesend {
+#messages .voice a.voicesend {
 	background: #4caf50;
 }
-#chatroom .voice a.voicecancel {
+#messages .voice a.voicecancel {
 	background: #ff5722;
 }
-#chatroom .voice a.disabled {
+#messages .voice a.disabled {
 	opacity: 0.3;
 }

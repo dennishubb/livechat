@@ -7,7 +7,8 @@ const route_path = function() {
 	else {
 		switch(path[1]){
 			case 'chat':
-				path = '../views/chatlist/chatlist.html';
+				if(typeof path[3] !== 'undefined' && path[3] === 'message') path = '../views/message/messages.html';
+				else path = '../views/chatlist/chatlist.html';
 				break;
 			default:
 				path = '../views/errors/404.html';
