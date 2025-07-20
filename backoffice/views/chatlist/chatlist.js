@@ -7,7 +7,7 @@ require(['jquery', 'underscore'], function($,_){
 		var request = {'merchant_id':5};
 		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
 			console.log('chats/get');
-			console.log(response.data);
+			console.log(response);
 			// data = _.filter(data, function(c){ return c.user && c.user.id; });
 			if (!(response.data && response.data.length)) {
 				console.log('no data?');
