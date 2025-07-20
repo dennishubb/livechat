@@ -4,14 +4,18 @@
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, x-authorization-key');
     
+    if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit(0);
+
     define('ROOT', __DIR__);
 
     require_once(ROOT.'/include/db.php');
     require_once(ROOT.'/include/common.php');
     require_once(ROOT.'/include/routes.php');
 
-    DB::insert('debug', ['text' => json_encode(getallheaders())]);
-    DB::insert('debug', ['text' => json_encode($_SERVER)]);
+    // DB::insert('debug', ['text' => json_encode(getallheaders())]);
+    // DB::insert('debug', ['text' => json_encode($_SERVER)]);
+    
+
     $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
     $req_token = trim(getallheaders()['x-authorization-key']);
     if($req_token !== $token) http_response(code:403);
