@@ -5,6 +5,8 @@ $(function() {
 
 	var request = {'merchant_id':5};
 	$.post('http://api.livechat.com/v1/chats/get', request, function(data){
+		console.log('chats/get');
+		console.log(data);
 		// data = _.filter(data, function(c){ return c.user && c.user.id; });
 		if (!(data.data && data.data.length)) {
 			return;
