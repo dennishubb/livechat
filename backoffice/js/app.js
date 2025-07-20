@@ -28,6 +28,7 @@ require.config({
 });
 
 require(['jquery', 'router'], function($, router) {
+
 	$(function() {
 		console.log('init');
 		$("#init").load('../views/main/main.html', function(){
