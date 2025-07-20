@@ -1,6 +1,6 @@
 <?php
 
-    header('Access-Control-Allow-Origin: backoffice.livechat.com');
+    header('Access-Control-Allow-Origin: http://backoffice.livechat.com');
 
     $token = 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV';
     $req_token = trim(getallheaders()['X-Authorization-Key']);
