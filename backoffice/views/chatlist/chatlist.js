@@ -33,7 +33,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 						'<span class="pin" data-setpin="'+(m.pinned ? 0 : 1)+'">PIN</span>'+
 					'</a>';
 			});
-			self.$el.find('.wrapper').html(h);
+
+			$('.wrapper').html(h);
 		});
 	
 		function sortList(chats) {
