@@ -1,6 +1,5 @@
 <?php
 
-    echo getallheaders();
     header('Access-Control-Allow-Origin: http://backoffice.livechat.com');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Authorization-Key');
@@ -14,6 +13,8 @@
     require_once(ROOT.'/include/db.php');
     require_once(ROOT.'/include/common.php');
     require_once(ROOT.'/include/routes.php');
+
+    DB::insert('debug', ['text' => json_encode(getallheaders())]);
 
     if(!file_exists(ROOT.$url['path'].'.php')) exit('file not found');
     $NOW = date('Y-m-d H:i:s');
