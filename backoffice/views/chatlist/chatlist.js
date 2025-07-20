@@ -1,4 +1,4 @@
-require(['jquery', 'underscore', 'moment'], function($,_,moment){
+require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 	
