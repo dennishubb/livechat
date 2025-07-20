@@ -35,8 +35,6 @@ require(['jquery', 'router'], function($, router) {
 		});
 
 		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-			console.log("PREFILTER");
-			console.log(options);
 			jqXHR.setRequestHeader('X-Authorization-Key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
 		});
 	});
