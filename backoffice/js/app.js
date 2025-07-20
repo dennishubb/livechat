@@ -33,5 +33,9 @@ require(['jquery', 'router'], function($, router) {
 		$("#init").load('../views/main/main.html', function(){
 			$("#content").load(route_path())
 		});
+
+		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+			jqXHR.setRequestHeader('X-Authorization-Key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
+		});
 	});
 });
