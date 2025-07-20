@@ -35,9 +35,13 @@ require(['jquery', 'router'], function($, router) {
 		});
 
 		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-			console.log("PREFILTER");
-			jqXHR.setRequestHeader('X-Authorization-Key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
-			console.log(jqXHR);
+			
+			if(options.beforeSend){
+				console.log("PREFILTER");
+				jqXHR.setRequestHeader('X-Authorization-Key', 'QrtYujorR1Y4gGaxO2CAilCGQzTiLL6tM84Pap5y14vY57v3W5IMKthcCGPEEVmV');
+				console.log(jqXHR);
+			}
+			
 		});
 	});
 });
