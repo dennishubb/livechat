@@ -18,7 +18,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 				// if (self.pintype !== 'ALL' && self.pintype !== parseInt(m.pinned)) {
 				// 	return;
 				// }
-				var displayTime = moment(m.createdDateTime);
+				var displayTime = moment(m.created_at);
 				if (displayTime.format('D MMM YYYY') === today) {
 					displayTime = displayTime.format('h:mm A');
 				} else {
