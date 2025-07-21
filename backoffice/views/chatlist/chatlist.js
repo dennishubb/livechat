@@ -36,7 +36,9 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		});
 
 		$('.chat').click(function(e){
+			console.log('cliked');
 			var chat_id = $(this).attr('id');
+			console.log(chat_id);
 			window.location.href = BASEURL+'/chat/'+$(this).attr('data-mam-id')+'/message/'+chat_id;
 		});
 	
