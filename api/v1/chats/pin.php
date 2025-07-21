@@ -1,6 +1,6 @@
 <?php
 
-parse_request(['merchant_id', 'user_id', 'pin_id']);
+parse_request(['chat_id', 'pin_id']);
 
 if(empty($user_id)) http_response(code:400, message:'invalid user');
 

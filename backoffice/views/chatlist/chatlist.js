@@ -23,7 +23,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 					displayTime = displayTime.format('D MMM');
 				}
 				//href="chat/'+TOKEN+'/messages/'+m.id+'
-				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+' href="chat/'+m.merchant_id+'/messages/'+m.id+'">'+
+				h+= '<a class="chat '+chatStatus(m)+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+' href="'+BASEURL+'/chat/'+m.merchant_id+'/messages/'+m.id+'">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
@@ -34,10 +34,6 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 			$('.wrapper').html(h);
 		});
-
-		function render(){
-
-		}
 	
 		function sortList(chats) {
 			// self = this;
