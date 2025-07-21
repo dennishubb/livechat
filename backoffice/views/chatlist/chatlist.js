@@ -23,7 +23,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 					displayTime = displayTime.format('D MMM');
 				}
 				//href="chat/'+TOKEN+'/messages/'+m.id+'
-				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'" data-mam-id="'+m.merchant_id+'" data-id="'+m.user_id+'">'+
+				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'" data-mam-id="'+m.merchant_id+'">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
