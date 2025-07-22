@@ -35,7 +35,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			$('.wrapper').html(h);
 		});
 
-		$('.chat').click(function(e){
+		$(document).on('click', '.chat', function(e){
+		// $('.chat').click(function(e){
 			console.log('cliked');
 			var chat_id = $(this).attr('id');
 			console.log(chat_id);
@@ -121,14 +122,14 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		// 	playSound === 'off' ? btn.text('Sound Off') : btn.text('Sound On');
 		// },
 
-		$(".pin_type").click(function(){
+		$(".pin_type").click(function(e){
 			console.log("pin type");
 			var $this = $(e.currentTarget);
 			$this.addClass('selected').siblings().removeClass('selected');
 			_.setLocalStorage('PINTYPE', $this.data('type'));
 		});
 
-		$(".pin").click(function(){
+		$(".pin").click(function(e){
 			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
@@ -144,7 +145,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			}
 		});
 
-		$('.chat-sound').click(function(){
+		$('.chat-sound').click(function(e){
 			console.log("chat sounds");
 			var $this = $(e.currentTarget);
 			if (_.getLocalStorage('CHATSOUND') === 'off') {
