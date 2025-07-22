@@ -120,7 +120,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		// 	playSound === 'off' ? btn.text('Sound Off') : btn.text('Sound On');
 		// },
 
-		$(document).on('click', '.pin_type', function(e){
+		$(document).on('click', '.pin-type', function(e){
 			console.log("pin type");
 			var $this = $(e.currentTarget);
 			$this.addClass('selected').siblings().removeClass('selected');
