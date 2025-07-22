@@ -122,12 +122,14 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		// },
 
 		$(".pin_type").click(function(){
+			console.log("pin type");
 			var $this = $(e.currentTarget);
 			$this.addClass('selected').siblings().removeClass('selected');
 			_.setLocalStorage('PINTYPE', $this.data('type'));
 		});
 
 		$(".pin").click(function(){
+			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
 			var $this = $(e.currentTarget);
@@ -143,6 +145,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		});
 
 		$('.chat-sound').click(function(){
+			console.log("chat sounds");
 			var $this = $(e.currentTarget);
 			if (_.getLocalStorage('CHATSOUND') === 'off') {
 				$this.text('Sound On');
