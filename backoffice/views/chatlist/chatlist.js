@@ -73,7 +73,9 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		function chatStatus(m) {
 			console.log('chatstatus');
 			if (parseInt(m.pinned)) {
+				console.log('pinned?');
 				if (m.last_message_user_id !== m.user_id) {
+					console.log('admin pin');
 					return 'pinned';
 				}
 				return 'yellow';
