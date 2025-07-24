@@ -13,7 +13,7 @@ const route_path = function() {
 	else {
 		switch(path[1]){
 			case 'chat':
-				if(typeof path[2] !== 'undefined'){
+				if(typeof path[2] === 'undefined'){
 					path = '../views/errors/404.html';
 					break;
 				}
