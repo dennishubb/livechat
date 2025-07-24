@@ -1,9 +1,12 @@
+let merchant_id = '';
+let chat_id = '';
+let token = '';
+
 const route_path = function() {
 	let path = location.pathname.split("/");
-	let merchant_id = '';
-	let chat_id = '';
+
 	let params = new URLSearchParams(document.location.search);
-	const token = params.get('token');
+	token = params.get('token');
 
 	console.log(path);
 
