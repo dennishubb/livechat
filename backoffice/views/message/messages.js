@@ -1,6 +1,15 @@
 require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
+		  
+		const request = new URLSearchParams({merchant_id: merchant_id, chat_id: chat_id}).toString();
+
+		$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
+			const resp = JSON.parse(response);
+			console.log(resp);
+
+			// $('.wrapper').html(h);
+		});
 	
 		// var request = {'merchant_id':5};
 		// $.post('http://api.livechat.com/v1/chats/messages/get', request, function(response){

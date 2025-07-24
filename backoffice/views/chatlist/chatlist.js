@@ -1,9 +1,13 @@
 require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
+
+		var pin_id = localStorage.getItem("PINTYPE") ? localStorage.getItem("PINTYPE") : 'ALL';
+
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 	
-		var request = {'merchant_id':5};
-		$.post('http://api.livechat.com/v1/chats/get', request, function(response){
+		const request = new URLSearchParams({merchant_id: merchant_id}).toString();
+
+		$.get('http://api.livechat.com/v1/chats/get', request, function(response){
 			const resp = JSON.parse(response);
 			if (!(resp.data && resp.data.length)) {
 				return;
@@ -13,9 +17,9 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			var h = '';
 			_.each(sortList(chats), function(m) {
 				console.log(m);
-				// if (self.pintype !== 'ALL' && self.pintype !== parseInt(m.pinned)) {
-				// 	return;
-				// }
+				if (pin_id !== 'ALL' && pin_id !== parseInt(m.pin_id)) {
+					return;
+				}
 				var displayTime = moment(m.created_at);
 				if (displayTime.format('D MMM YYYY') === today) {
 					displayTime = displayTime.format('h:mm A');
@@ -23,7 +27,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 					displayTime = displayTime.format('D MMM');
 				}
 				//href="chat/'+TOKEN+'/messages/'+m.id+'
-				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'" data-mam-id="'+m.merchant_id+'">'+
+				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'"">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
@@ -38,7 +42,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		$(document).on('click', '.chat', function(e){
 		// $('.chat').click(function(e){
 			var chat_id = $(this).attr('id');
-			window.location.href = BASEURL+'/chat/'+$(this).attr('data-mam-id')+'/message/'+chat_id;
+			window.location.href = BASEURL+'/chat/'+merchant_id+'/message/'+chat_id;
 		});
 	
 		function sortList(chats) {
@@ -121,10 +125,10 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		// },
 
 		$(document).on('click', '.pin-type', function(e){
-			console.log("pin type");
 			var $this = $(e.currentTarget);
 			$this.addClass('selected').siblings().removeClass('selected');
-			_.setLocalStorage('PINTYPE', $this.data('type'));
+			localStorage.setItem('PINTYPE', $this.data('type'));
+			pin_id = $this.data('type');
 		});
 
 		$(document).on('click', '.pin', function(e){
@@ -146,12 +150,12 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		$(document).on('click', '.chat-sound', function(e){
 			console.log("chat sounds");
 			var $this = $(e.currentTarget);
-			if (_.getLocalStorage('CHATSOUND') === 'off') {
+			if (localStorage.getItem("CHATSOUND") === 'off') {
 				$this.text('Sound On');
-				_.setLocalStorage('CHATSOUND','on');
+				localStorage.setItem('CHATSOUND','on');
 			} else {
 				$this.text('Sound Off');
-				_.setLocalStorage('CHATSOUND','off');
+				localStorage.setItem('CHATSOUND','off');
 			}	
 		});
 	});

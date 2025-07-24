@@ -1,6 +1,6 @@
 <?php
 
-    parse_request(['merchant_id', 'user_id', 'admin_id', 'message', 'source', 'status', 'created_datetime', 'template_id']);
+    parse_request(['merchant_id', 'user_id', 'message', 'source', 'status', 'created_datetime', 'template_id']);
 
     if(empty($user_id) || empty($merchant_id)) http_response(code:400); 
 
@@ -16,15 +16,23 @@
         $chat->save();
     }else{
         $chat->last_message = $message;
-        $chat->last_message_user_id = $admin_id ? $admin_id : $user_id;
+        $chat->last_message_user_id = $user_id;
         $chat->save();
     }
+
+    //admin
+    // if ($chat->user_id !== $user_id) {
+    //     $rediscache->del('MERCHANTNEWCHAT-'.$merchant_id);
+    // } else {
+    //     $rediscache->set('MERCHANTNEWCHAT-'.$data['merchant_id'], $NOW, 10);
+    //     //$rediscache->set('LAST-'.$data['merchant_id'].'-'.$data['user_id'], json_encode(['source' => $data['source'], 'created_datetime' => $data['created_datetime']]), 86400);
+    // }
     
     include(ROOT.'/model/message.php');
     $chat_message = new Message();
 
     $chat_message->merchant_id   = $merchant_id;
-    $chat_message->user_id       = $admin_id ? $admin_id : $user_id;
+    $chat_message->user_id       = $user_id;
     $chat_message->message       = $message;
     $chat_message->source        = $source;
     $chat_message->template_id   = empty($template_id) ? 0 : $template_id;
