@@ -3,27 +3,24 @@ let chat_id = '';
 let token = '';
 
 const route_path = function() {
-	let path = location.pathname.split("/");
-
+	let paths = location.pathname.split("/");
 	let params = new URLSearchParams(document.location.search);
 	token = params.get('token');
 
-	console.log(path);
-
-	if(typeof path[1] === 'undefined') {
+	if(typeof paths[1] === 'undefined') {
 		path = '../views/errors/404.html';
 	}
 	else {
-		switch(path[1]){
+		switch(paths[1]){
 			case 'chat':
-				if(typeof path[2] === 'undefined'){
+				if(typeof paths[2] === 'undefined'){
 					path = '../views/errors/404.html';
 					break;
 				}
-				merchant_id = parseInt(path[2]);
-				if(typeof path[3] !== 'undefined' && path[3] === 'message' && typeof path[4] !== 'undefined'){ 
+				merchant_id = parseInt(paths[2]);
+				if(typeof paths[3] !== 'undefined' && paths[3] === 'message' && typeof paths[4] !== 'undefined'){ 
 					path = '../views/message/messages.html';
-					chat_id = parseInt(path[4]);
+					chat_id = parseInt(paths[4]);
 				}
 				else{
 					 path = '../views/chatlist/chatlist.html';
