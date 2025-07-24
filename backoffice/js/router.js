@@ -23,7 +23,9 @@ const route_path = function() {
 				merchant_id = path[2];
 				if(typeof path[3] !== 'undefined' && path[3] === 'message' && typeof path[4] !== 'undefined'){ 
 					path = '../views/message/messages.html';
+					console.log(path[4]);
 					chat_id = path[4];
+					console.log(chat_id);
 				}
 				else{
 					 path = '../views/chatlist/chatlist.html';
