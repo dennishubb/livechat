@@ -1,7 +1,7 @@
 const route_path = function() {
-	const path = location.pathname.split("/");
-	const merchant_id = '';
-	const chat_id = '';
+	let path = location.pathname.split("/");
+	let merchant_id = '';
+	let chat_id = '';
 	let params = new URLSearchParams(document.location.search);
 	const token = params.get('token');
 
