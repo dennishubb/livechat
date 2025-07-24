@@ -1,6 +1,8 @@
 require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
+
+		console.log(chat_id);
 		  
 		const request = new URLSearchParams({merchant_id: merchant_id, chat_id: chat_id}).toString();
 
