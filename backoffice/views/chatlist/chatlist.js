@@ -41,7 +41,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 		$(document).on('click', '.chat', function(e){
 		// $('.chat').click(function(e){
-			var chat_id = $(this).attr('id');
+			var chat_id = parseInt($(this).attr('id'));
 			window.location.href = BASEURL+'/chat/'+merchant_id+'/message/'+chat_id;
 		});
 	

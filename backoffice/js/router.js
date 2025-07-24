@@ -8,8 +8,6 @@ const route_path = function() {
 	let params = new URLSearchParams(document.location.search);
 	token = params.get('token');
 
-	console.log(path);
-
 	if(typeof path[1] === 'undefined') {
 		path = '../views/errors/404.html';
 	}
@@ -20,12 +18,10 @@ const route_path = function() {
 					path = '../views/errors/404.html';
 					break;
 				}
-				merchant_id = path[2];
+				merchant_id = parseInt(path[2]);
 				if(typeof path[3] !== 'undefined' && path[3] === 'message' && typeof path[4] !== 'undefined'){ 
 					path = '../views/message/messages.html';
-					console.log(path[4]);
-					chat_id = path[4];
-					console.log(chat_id);
+					chat_id = parseInt(path[4]);
 				}
 				else{
 					 path = '../views/chatlist/chatlist.html';
@@ -36,8 +32,6 @@ const route_path = function() {
 				break;
 		}
 	}
-
-	console.log(path);
 
 	return path;
 };
