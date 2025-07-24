@@ -5,6 +5,8 @@ const route_path = function() {
 	let params = new URLSearchParams(document.location.search);
 	const token = params.get('token');
 
+	console.log(path);
+
 	if(typeof path[1] === 'undefined') {
 		path = '../views/errors/404.html';
 	}
