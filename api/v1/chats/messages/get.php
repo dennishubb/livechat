@@ -19,9 +19,9 @@ if(!$chat) http_response(code:404, message:'chat not found');
 
 $updated_at = date('Y-m-d H:i:s', strtotime('-1 day'));
 
-$messages = DB::query("SELECT id, user_id, status, source, created_at, message, name FROM messages 
-INNER JOIN user_names ON messages.merchant_id = user_names.merchant_id AND messages.user_id = user_names.user_id
-WHERE messages.chat_id = %i ORDER BY messages.created_at DESC limit 50", $chat->id);
+$messages = DB::query("SELECT a.id, a.user_id, a.status, a.source, a.created_at, a.message, b.name FROM messages a
+INNER JOIN user_names b ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
+WHERE a.chat_id = %i ORDER BY a.created_at DESC limit 50", $chat->id);
 
 $res['messages'] = $messages;
 
