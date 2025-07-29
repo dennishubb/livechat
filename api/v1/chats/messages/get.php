@@ -17,13 +17,13 @@ if(!$chat) http_response(code:404, message:'chat not found');
 // if(empty($page)) $page = '';
 // else { $page = $page * $limit; $queryLimit = "LIMIT ".($page !== ''? "$page, ":'')."$limit"; }
 
-$updated_at = date('Y-m-d H:i:s', strtotime('-1 day'));
-
-$messages = DB::query("SELECT a.id, a.user_id, a.status, a.source, a.created_at, a.message, b.name FROM messages a
-INNER JOIN user_names b ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
-WHERE a.chat_id = %i ORDER BY a.created_at DESC limit 50", $chat->id);
+$messages = DB::query("SELECT a.id, a.user_id, a.status, a.source, a.created_at, a.message, b.name 
+FROM messages a INNER JOIN user_names b 
+ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
+WHERE a.chat_id = %i ORDER BY a.created_at DESC limit 100", $chat->id);
 
 $res['messages'] = $messages;
+$res['chat']['user_id'] = $chat->user_id;
 
 http_response(data: $res);
 
