@@ -21,9 +21,10 @@ const route_path = function() {
 				if(typeof paths[3] !== 'undefined' && paths[3] === 'message' && typeof paths[4] !== 'undefined'){ 
 					path = '../views/message/messages.html';
 					chat_id = parseInt(paths[4]);
-				}
-				else{
-					 path = '../views/chatlist/chatlist.html';
+				}else if(paths.length === 3){
+					path = '../views/chatlist/chatlist.html';
+				}else{
+					path = '../views/errors/404.html';
 				}
 				break;
 			default:
