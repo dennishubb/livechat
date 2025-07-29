@@ -19,11 +19,10 @@ if(!$chat) http_response(code:404, message:'chat not found');
 
 $updated_at = date('Y-m-d H:i:s', strtotime('-1 day'));
 
-$messages = DB::query("SELECT id, user_id, status, source, created_at, message FROM messages WHERE chat_id = %i AND updated_at >= %s ORDER BY created_at DESC ", $chat_id, $updated_at);
-$chat = (array) $chat;
+$messages = DB::query("SELECT id, user_id, status, source, created_at, message FROM messages WHERE chat_id = %i ORDER BY created_at DESC limit 50", $chat->id);
 
 $res['messages'] = $messages;
-$res['chat'] = $chat;
+$res['chat'] = (array)$chat->MeekroORM_orm_row_orig;
 
 http_response(data: $res);
 
