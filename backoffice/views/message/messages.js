@@ -2,15 +2,65 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
 
-		console.log(chat_id);
-		  
-		const request = new URLSearchParams({merchant_id: merchant_id, chat_id: chat_id}).toString();
+		const request = new URLSearchParams(
+			{
+				merchant_id: merchant_id, 
+				chat_id: chat_id
+			}
+		).toString();
 
 		$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
 			const resp = JSON.parse(response);
+
 			console.log(resp);
 
-			// $('.wrapper').html(h);
+			// var today = moment().format('D MMM YYYY ');
+			// var h = '';
+			// _.each(data.messages.reverse(), function(m) {
+			// 	var createdDateTime = moment(m.created_at);
+			// 	h+= '<div class="message '+(m.admin ? (m.admin.id === User.id ? 'myself' : 'staff') : 'customer')+'">'+
+			// 			'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
+			// 			'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
+			// 			'<p class="channel '+self.showChannel(m)+' '+(m.status || '')+'">'+self.showChannel(m)+'</p>'+
+			// 			'<p class="name">'+(m.admin ? m.admin.name : '<span class="profile"><i class="fa fa-user"></i>'+self.user.name+'</span>')+'</p>'+
+			// 			'<p class="text">'+self.showMessage(m.message)+'</p>'+
+			// 		'</div>';
+			// });
+			// self.$el.find('.action.profile').html(self.user.name);
+			// if (self.prevHTML !== h) {
+			// 	self.prevHTML = h;
+			// 	self.$el.find('.wrapper').html(h);
+			// }
+			// if (data.templates) {
+			// 	var orderChat = Object.fromEntries(Object.entries(data.templates).sort())
+			// 	self.templates = orderChat;
+			// 	self.loadTemplates();
+			// }
+			// if (typeof data.pinchat !== 'undefined') {
+			// 	if (parseInt(data.pinchat)) {
+			// 		self.$el.find('.pin').hide();
+			// 		self.$el.find('.pin[data-setpin="0"]').show();
+			// 	} else {
+			// 		self.$el.find('.pin').show();
+			// 		self.$el.find('.pin[data-setpin="0"]').hide();
+			// 	}
+			// }
+			// if (_.checkAccess(self.role,'ShowDeleteChat')) {
+			// 	self.$el.find('.delete').show();
+			// } else {
+			// 	self.$el.find('.delete').hide();
+			// }
+			// if (_.checkAccess(self.role,'HidePinChat')) {
+			// 	self.$el.find('.pin').hide();
+			// }
+		}).always(function() {
+			// if (self.$scrollable.css('opacity') === '0') {
+			// 	self.$scrollable.css('opacity','1');
+			// 	self.$scrollable[0].scrollTop = self.$scrollable[0].scrollHeight;
+			// } else {
+			// 	self.scrollToBottom();
+			// }
+			// MainView.periodic(self,self.getMessage,5000);
 		});
 	
 		// var request = {'merchant_id':5};

@@ -5,7 +5,11 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
 	
-		const request = new URLSearchParams({merchant_id: merchant_id}).toString();
+		const request = new URLSearchParams(
+			{
+				merchant_id: merchant_id
+			}
+		).toString();
 
 		$.get('http://api.livechat.com/v1/chats/get', request, function(response){
 			const resp = JSON.parse(response);
