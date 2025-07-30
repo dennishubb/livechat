@@ -12,34 +12,38 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
 			const resp = JSON.parse(response);
 
-			console.log(resp);
+			if(resp.status === 200){
+				const data = resp.data;
 
-			const player_id = resp.chat.user_id;
-			const player_name = resp.chat.user_name;
-			const pin_id = resp.chat.pin_id;
-			var today = moment().format('D MMM YYYY ');
-			var h = '';
-			_.each(data.messages.reverse(), function(m) {
-				var createdDateTime = moment(m.created_at);
-				
-				h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === User.id ? 'myself' : 'staff') : 'customer')+'">'+
-						'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
-						'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
-						'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
-						'<p class="name">'+(m.user_id !== player_id ? m.name : '<span class="profile"><i class="fa fa-user"></i>'+player_name+'</span>')+'</p>'+
-						'<p class="text">'+self.showMessage(m.message)+'</p>'+
-					'</div>';
-			});
-			$('.action.profile').html(player_name);
-		    $('.wrapper').html(h);
+				const player_id = data.chat.user_id;
+				const player_name = data.chat.user_name;
+				const pin_id = data.chat.pin_id;
+				var today = moment().format('D MMM YYYY ');
+				var h = '';
+				_.each(data.messages.reverse(), function(m) {
+					var createdDateTime = moment(m.created_at);
+					
+					h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === User.id ? 'myself' : 'staff') : 'customer')+'">'+
+							'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
+							'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
+							'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
+							'<p class="name">'+(m.user_id !== player_id ? m.name : '<span class="profile"><i class="fa fa-user"></i>'+player_name+'</span>')+'</p>'+
+							'<p class="text">'+self.showMessage(m.message)+'</p>'+
+						'</div>';
+				});
+				$('.action.profile').html(player_name);
+				$('.wrapper').html(h);
 
-			if (pin_id === 0) {
-				$('.pin').hide();
-				$('.pin[data-setpin="0"]').show();
-			}else{
-				$('.pin').show();
-				$('.pin[data-setpin="0"]').hide();
+				if (pin_id === 0) {
+					$('.pin').hide();
+					$('.pin[data-setpin="0"]').show();
+				}else{
+					$('.pin').show();
+					$('.pin[data-setpin="0"]').hide();
+				}
 			}
+
+			
 			// if (_.checkAccess(self.role,'ShowDeleteChat')) {
 			// 	self.$el.find('.delete').show();
 			// } else {
