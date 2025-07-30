@@ -87,31 +87,36 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 				const resp = JSON.parse(response);
 	
 				console.log(resp);
+
+				if(resp.status === 200){
+					const data = resp.data;
+
+					var templates = [];
+					var shortcuts = [];
+					_.each(data.templates, function(v,k) {
+						if (k && k.length && k.substring(0,2) === '++') {
+							shortcuts.push(k.substring(2));
+						} else {
+							templates.push(k);
+						}
+					});
+					// if (_.checkAccess(User.get('role'),'HideChatTool')) {
+					// 	self.$el.find('.chat-tools').remove();
+					// }
+					if (shortcuts.length) {
+						shortcuts.sort();
+						$('.shortcuts').html(_.reduce(shortcuts, function(h,v) { return h+'<div class="shortcut" data-key="'+v+'">'+v+'</div>'; }, '')).show();
+					}
+					if (templates.length) {
+						$('[name="template"]').html(_.reduce(templates, function(h,v) { return h+'<option>'+v+'</option>'; }, '<option value="">(Select Template)</option>')+'<option>(Edit Template)</option>');
+					}
+					// if (_.checkAccess(self.role,'HideEditTemplate')) {
+					// 	self.$el.find('select option:last').remove();
+					// }
+				}
 			});
 			
-			// var self = this;
-			// var templates = [];
-			// var shortcuts = [];
-			// _.each(self.templates, function(v,k) {
-			// 	if (k && k.length && k.substring(0,2) === '++') {
-			// 		shortcuts.push(k.substring(2));
-			// 	} else {
-			// 		templates.push(k);
-			// 	}
-			// });
-			// if (_.checkAccess(User.get('role'),'HideChatTool')) {
-			// 	self.$el.find('.chat-tools').remove();
-			// }
-			// if (shortcuts.length) {
-			// 	shortcuts.sort();
-			// 	self.$el.find('.shortcuts').html(_.reduce(shortcuts, function(h,v) { return h+'<div class="shortcut" data-key="'+v+'">'+v+'</div>'; }, '')).show();
-			// }
-			// if (templates.length) {
-			// 	self.$el.find('[name="template"]').html(_.reduce(templates, function(h,v) { return h+'<option>'+v+'</option>'; }, '<option value="">(Select Template)</option>')+'<option>(Edit Template)</option>');
-			// }
-			// if (_.checkAccess(self.role,'HideEditTemplate')) {
-			// 	self.$el.find('select option:last').remove();
-			// }
+			
 		}
 		
 		function showMessage(message) {
