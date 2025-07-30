@@ -1,8 +1,20 @@
 <?php
 
-    parse_request(['merchant_id', 'user_id', 'message', 'source', 'status', 'created_datetime', 'template_id']);
+    parse_request(['merchant_id', 'user_id', 'message', 'source', 'status', 'created_datetime', 'template_id', 'template_type']);
 
     if(empty($user_id) || empty($merchant_id)) http_response(code:400); 
+
+    if(!empty($template_id) && $template_id !== 0){
+        $message = DB::queryFirstField("SELECT message FROM templates WHERE id = %i", $template_id);
+        if(empty($message)) http_response(code:400, message:"invalid template");
+    }
+    if(!empty($template_type)){
+        //get default if merchant didnt set a message
+        $template = DB::queryFirstRow("SELECT id, message FROM templates WHERE merchant_id = %i AND type = %s", $merchant_id, $template_type);
+        if(empty($template)) $template = DB::queryFirstRow("SELECT id, message FROM templates WHERE merchant_id = %i AND type = %s", 0, $template_type);
+        if(!empty($template)){$message = $template['message']; $template_id = $template['id'];}
+        else http_response(code:400, message:"invalid template");
+    }
 
     //create or update chatroom whenever a message is sent
     include(ROOT.'/model/chat.php');

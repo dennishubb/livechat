@@ -24,6 +24,8 @@ WHERE a.chat_id = %i ORDER BY a.created_at DESC limit 100", $chat->id);
 
 $res['messages'] = $messages;
 $res['chat']['user_id'] = $chat->user_id;
+$res['chat']['user_name'] = DB::queryFirstField("SELECT name FROM users WHERE merchant_id = %i AND user_id = %i", $merchant_id, $chat->user_id);
+$res['chat']['pin_id'] = $chat->pin_id;
 
 http_response(data: $res);
 
