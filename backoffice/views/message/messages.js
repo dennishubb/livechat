@@ -1,4 +1,4 @@
-require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
+require(['jquery', 'underscore', 'lib/moment.min', 'autolinker'], function($,_,moment,Autolinker){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
 
@@ -108,52 +108,53 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			// }
 		}
 		
-		// showMessage: function(message) {
-		// 	var fname = '';
-		// 	var tmp = message.split('?')[0].split('#')[0].split('/');
-		// 	if (tmp.length > 1) {
-		// 		fname = tmp[tmp.length-1];
-		// 	}
-		// 	if (message.indexOf('firebasestorage') > 0) {
-		// 		message = '<img src="'+message+'">';
-		// 	} else if (message.indexOf('http') === 0 && (fname.indexOf('.jpg') > 0 || fname.indexOf('.png') > 0 || fname.indexOf('.gif') > 0)) {
-		// 		message = '<img src="'+message+'">';
-		// 	} else if (message.indexOf('http') === 0 && (fname.indexOf('.ogg') > 0)) {
-		// 		message = '<audio controls><source src="'+message+'" type="audio/ogg"></audio>';
-		// 	} else {
-		// 		message = _.Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
-		// 		var divTemp = document.createElement('div');
-		// 		divTemp.innerHTML = message;
-		// 		message = divTemp.innerHTML;
-		// 	}
-		// 	return message;
-		// },
+		function showMessage(message) {
+			var fname = '';
+			var tmp = message.split('?')[0].split('#')[0].split('/');
+			if (tmp.length > 1) {
+				fname = tmp[tmp.length-1];
+			}
+			if (message.indexOf('firebasestorage') > 0) {
+				message = '<img src="'+message+'">';
+			} else if (message.indexOf('http') === 0 && (fname.indexOf('.jpg') > 0 || fname.indexOf('.png') > 0 || fname.indexOf('.gif') > 0)) {
+				message = '<img src="'+message+'">';
+			} else if (message.indexOf('http') === 0 && (fname.indexOf('.ogg') > 0)) {
+				message = '<audio controls><source src="'+message+'" type="audio/ogg"></audio>';
+			} else {
+				//message = _.Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+				message = Autolinker.link(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+				var divTemp = document.createElement('div');
+				divTemp.innerHTML = message;
+				message = divTemp.innerHTML;
+			}
+			return message;
+		}
 		
-		// showChannel: function(m) {
-		// 	var channel = 'NOSEND';
-		// 	if (m.source === 'VIBER') {
-		// 		channel = 'VIBER';
-		// 	} else if (m.source === 'LINE') {
-		// 		channel = 'LINE';
-		// 	} else if (m.source === 'TELEGRAM') {
-		// 		channel = 'TELEGRAM';
-		// 	} else if (m.admin) {
-		// 		if (m.source === 'LIVECHAT') {
-		// 			channel = 'LIVECHAT';
-		// 		} else if (m.status === 'SENT') {
-		// 			channel = 'WHATSAPP';
-		// 		} else if (m.status === 'SMS') {
-		// 			channel = 'SMS';
-		// 		}
-		// 	} else {
-		// 		if (m.source === 'LIVECHAT') {
-		// 			channel = 'LIVECHAT';
-		// 		} else {
-		// 			channel = 'WHATSAPP';
-		// 		}
-		// 	}
-		// 	return channel;
-		// },
+		function showChannel(m) {
+			var channel = 'NOSEND';
+			if (m.source === 'VIBER') {
+				channel = 'VIBER';
+			} else if (m.source === 'LINE') {
+				channel = 'LINE';
+			} else if (m.source === 'TELEGRAM') {
+				channel = 'TELEGRAM';
+			} else if (m.admin) {
+				if (m.source === 'LIVECHAT') {
+					channel = 'LIVECHAT';
+				} else if (m.status === 'SENT') {
+					channel = 'WHATSAPP';
+				} else if (m.status === 'SMS') {
+					channel = 'SMS';
+				}
+			} else {
+				if (m.source === 'LIVECHAT') {
+					channel = 'LIVECHAT';
+				} else {
+					channel = 'WHATSAPP';
+				}
+			}
+			return channel;
+		}
 		
 		function scrollToBottom() {
 			if ($('.scrollable')[0].scrollTop + $('.scrollable').height() + 200 >= $('.scrollable')[0].scrollHeight) {

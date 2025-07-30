@@ -6,7 +6,8 @@ require.config({
 		backbone: 'lib/backbone',
 		text: 'lib/text',
 		views: 'views',
-		router: 'js/router'
+		router: 'js/router',
+		autolinker: 'js/Autolinker.min'
 	},
 	deps: [
 		'js/common',
