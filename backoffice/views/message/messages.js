@@ -28,7 +28,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 							'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
 							'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
 							'<p class="name">'+(m.user_id !== player_id ? m.name : '<span class="profile"><i class="fa fa-user"></i>'+player_name+'</span>')+'</p>'+
-							'<p class="text">'+self.showMessage(m.message)+'</p>'+
+							'<p class="text">'+showMessage(m.message)+'</p>'+
 						'</div>';
 				});
 				$('.action.profile').html(player_name);
