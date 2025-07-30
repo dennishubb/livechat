@@ -18,7 +18,7 @@ if(!$chat) http_response(code:404, message:'chat not found');
 // else { $page = $page * $limit; $queryLimit = "LIMIT ".($page !== ''? "$page, ":'')."$limit"; }
 
 $messages = DB::query("SELECT a.id, a.user_id, a.status, a.source, a.created_at, a.message, b.name 
-FROM messages a INNER JOIN user b 
+FROM messages a INNER JOIN users b 
 ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
 WHERE a.chat_id = %i ORDER BY a.created_at DESC limit 100", $chat->id);
 
