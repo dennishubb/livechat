@@ -23,7 +23,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 				_.each(data.messages.reverse(), function(m) {
 					var createdDateTime = moment(m.created_at);
 					
-					h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === User.id ? 'myself' : 'staff') : 'customer')+'">'+
+					h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === 1002 ? 'myself' : 'staff') : 'customer')+'">'+
 							'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
 							'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
 							'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
