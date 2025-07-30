@@ -79,7 +79,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 			const request = new URLSearchParams(
 				{
 					merchant_id: merchant_id,
-					user_id : user_id
+					user_id : 1002
 				}
 			).toString();
 	
