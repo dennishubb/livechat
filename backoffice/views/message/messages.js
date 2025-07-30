@@ -1,4 +1,4 @@
-require(['jquery', 'underscore', 'lib/moment.min', 'autolinker'], function($,_,moment,Autolinker){
+require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], function($,_,moment,Autolinker){
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
 
