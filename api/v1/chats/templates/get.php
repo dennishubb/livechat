@@ -14,28 +14,23 @@
     $defaults = array();
     $defaults_id = array();
     foreach($res as $data){
-        $defaults[$data['type']] = $data['message'];
-        $defaults_id[$data['type']] = $data['id'];
+        $defaults[$data['type']] = $data;
     }
 
     $res = DB::query("SELECT id, type, message FROM templates WHERE merchant_id = %i AND domain_id = %i".(empty($status) ? '' : " AND status = $status"), $merchant_id, $domain_id);
     $templates = array();
-    $templates_id = array();
     foreach($res as $data){
-        $templates[$data['type']] = $data['message'];
-        $templates_id[$data['type']] = $data['id'];
+        $templates[$data['type']] = $data;
     }
 
     $diff = array_diff_key($defaults, $templates);
     if(count($diff) > 0){
         foreach($diff as $key => $value){
             $templates[$key] = $value;
-            $templates_id[$key] = $defaults_id[$key];
         }
     }
 
     $resp['templates'] = $templates;
-    $resp['templates_id'] = $templates_id;
 
 	http_response(data:$resp);
 

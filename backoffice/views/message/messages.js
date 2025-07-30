@@ -12,6 +12,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 		$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
 			const resp = JSON.parse(response);
 
+			console.log(resp);
+
 			if(resp.status === 200){
 				const data = resp.data;
 
@@ -31,7 +33,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 							'<p class="text">'+showMessage(m.message)+'</p>'+
 						'</div>';
 				});
-				$('.action.profile').html(player_name);
+				// $('.action.profile').html(player_name);
 				$('.wrapper').html(h);
 
 				if (pin_id === 0) {
@@ -52,7 +54,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 			// if (_.checkAccess(self.role,'HidePinChat')) {
 			// 	self.$el.find('.pin').hide();
 			// }
-		}).always(function() {
+		})
+		.always(function() {
 			if ($('.scrollable').css('opacity') === '0') {
 				$('.scrollable').css('opacity','1');
 				$('.scrollable')[0].scrollTop = $('.scrollable')[0].scrollHeight;
@@ -60,6 +63,9 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 				scrollToBottom();
 			}
 			// MainView.periodic(self,self.getMessage,5000);
+		})
+		.done(function() {
+			getTemplates();
 		});
 
 		/**			if (data.templates) {
