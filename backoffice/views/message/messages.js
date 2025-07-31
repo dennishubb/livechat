@@ -188,6 +188,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 		};
 
 		function togglePin(){
+			console.log(pin_id);
 			if (pin_id !== 0) {
 				$('.pin').hide();
 				$('.pin[data-setpin="0"]').show();
