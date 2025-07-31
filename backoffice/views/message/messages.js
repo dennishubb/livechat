@@ -238,6 +238,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 		$(document).on('click', '.pin', function(e){
 			$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
+
+			}).done(function(resp){
 				if(resp.status === 200){
 					pin_id = $(e.currentTarget).data('setpin');
 					togglePin();
