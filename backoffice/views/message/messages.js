@@ -71,7 +71,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 				if ($('.scrollable').css('opacity') === '0') {
 					$('.scrollable').css('opacity','1');
 					$('.scrollable')[0].scrollTop = $('.scrollable')[0].scrollHeight;
-					scrollToBottom();
 				} else {
 					scrollToBottom();
 				}
@@ -109,8 +108,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 						}
 					});
 
-					console.log(shortcuts);
-					console.log(templates)
 					// if (_.checkAccess(User.get('role'),'HideChatTool')) {
 					// 	self.$el.find('.chat-tools').remove();
 					// }
@@ -204,7 +201,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 		});
 
 		$(document).on('change', '[name="template"]', function(e){
-			if ($this.val() === '(Edit Template)') {
+			if (e.val() === '(Edit Template)') {
 				window.location.href = 'backoffice.livechat.com/templates/5';
 				// self.goTo('template', {trigger:true});
 			}
