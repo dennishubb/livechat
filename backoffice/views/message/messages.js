@@ -193,6 +193,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 		$(document).on('click', '.shortcut', function(e){
 			var key = '++'+$(e.currentTarget).data('key');
+			console.log(key);
+			console.log(templates);
 			$('textarea').val(templates[key].message);
 			$('.send.default').trigger('click');
 			template_id = templates[key].id;
