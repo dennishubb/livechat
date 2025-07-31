@@ -164,4 +164,106 @@
         return $res;
     }
 
+    function validateFile($file,$size) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo,$file);
+        $extension = mineToExtension($mime);
+        if (empty($extension)) {
+            return 'Only png / jpg / gif / pdf file is allowed.'.(empty($mime) ? '' : ' ['.$mime.']');
+        }
+        if (filesize($file)/1048576 > $size) {
+            return 'Your uploaded file size is too big. (Max. '.$size.'MB)';
+        }
+        return ['mine' => $mime, 'extension' => $extension];
+    }
+    function processUploadedFile($file,$size,$compress = true, $purpose = false) {
+        global $MERCHANT;
+        $file = $file['tmp_name'];
+        $prop = validateFile($file,$size);
+        if (!empty($prop['mine'])) {
+            $mime = $prop['mine'];
+        } else if (is_string($prop)) {
+            http_response(code:400, message:$prop);
+        }
+        $fileURL = s3Upload($file,$mime,$compress);
+        $fileId = 0;
+        if (!empty($MERCHANT) && !empty($fileURL) && !empty($purpose)) {
+            DB::insert('file_upload', ['merchant_id' => $MERCHANT['id'], 'url' => $fileURL, 'purpose' => $purpose]);
+            $fileId = DB::insertId();
+        }
+        return ['fileId' => $fileId, 'fileURL' => $fileURL, 'mine' => $mime];
+    }
+    function s3Upload($file, $mime = null, $compress = true) {
+        $option = ['Bucket' => S3BUCKET];
+        $s3Client = new \Aws\S3\S3Client([
+            'version' => 'latest',
+            'region' => S3REGION,
+            'credentials' => ['key' => S3KEY, 'secret' => S3SECRET]
+        ]);
+        if (empty($mime)) {
+            $tmp = explode(',', $file);
+            $fileContent = base64_decode(end($tmp));
+            $tmp = explode(':', explode(';', $tmp[0])[0]);
+            $mime = end($tmp);
+            $extension = mineToExtension($mime);
+            $tempPath = sys_get_temp_dir() . '/' . uniqid('image_', true) . '.' . $extension;
+            file_put_contents($tempPath, $fileContent);
+            $file = $tempPath; // Update file to temp path for Intervention Image
+        } else {
+            $extension = mineToExtension($mime);
+        }
+        if (empty($extension)) {
+            return false;
+        }
+        $fileName = strrev(uniqid()) . generateSecureToken(8) . '.' . $extension;
+        if ($compress && in_array($extension, ['png', 'jpg', 'jpeg'])) {
+            // Initialize Intervention Image Manager
+            $manager = new \Intervention\Image\ImageManager();
+            $image = $manager->make($file);
+            // Check if the image width is more than 1500px
+            if ($image->width() > 1500) {
+                // Resize the image to 1500px width while maintaining aspect ratio
+                $image->resize(1500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            if (in_array($extension, ['jpg','jpeg'])) {
+                // For JPEG, apply lossy compression by adjusting quality
+                $image->encode('jpg', 30);
+                $compressedPath = sys_get_temp_dir() . '/' . uniqid('compressed_', true) . '.' . $extension;
+                $image->save($compressedPath);
+                $file = $compressedPath;
+            } else if ($extension === 'png') {
+                // Save the original image temporarily for pngquant processing
+                $compressedPath = sys_get_temp_dir() . '/' . uniqid('compressed_', true) . '.' . $extension;
+                $image->save($compressedPath);
+                // Compress PNG using pngquant
+                $command = ['pngquant', '--force', '--output', $compressedPath, '--quality=70', $compressedPath];
+                $process = new Symfony\Component\Process\Process($command);
+                $process->run();
+                if (!$process->isSuccessful()) {
+                    logLine("IMAGE", "pngquant compression failed : " . $process->getErrorOutput());
+                    // Optionally, continue using the original image if pngquant fails
+                } else {
+                    // Update file path to the compressed image
+                    $file = $compressedPath;
+                }
+            }
+        }
+        $option['SourceFile'] = $file;
+        $option['Key'] = S3MEDIAPATH . '/' . $fileName;
+        $option['ContentType'] = $mime;
+        // Upload the image to S3
+        $s3Client->putObject($option);
+        $url = 'https://' . GLOBALSTATICDOMAIN . '/' . S3MEDIAPATH . '/' . $fileName;
+        // Clean up temporary files
+        if (isset($tempPath) && file_exists($tempPath)) {
+            unlink($tempPath);
+        }
+        if (isset($compressedPath) && file_exists($compressedPath)) {
+            unlink($compressedPath);
+        }
+        return $url;
+    }
+
 ?>

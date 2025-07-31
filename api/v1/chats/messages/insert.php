@@ -1,6 +1,6 @@
 <?php
 
-    parse_request(['merchant_id', 'user_id', 'message', 'source', 'status', 'created_datetime', 'template_id', 'template_type']);
+    parse_request(['merchant_id', 'user_id', 'file', 'message', 'source', 'status', 'created_datetime', 'template_id', 'template_type']);
 
     if(empty($user_id) || empty($merchant_id)) http_response(code:400); 
 
