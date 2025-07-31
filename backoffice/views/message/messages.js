@@ -36,6 +36,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					var today = moment().format('D MMM YYYY ');
 					var h = '';
 					_.each(data.messages.reverse(), function(m) {
+						if(m.status === 2) return;
+
 						var createdDateTime = moment(m.created_at);
 						
 						h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === 1002 ? 'myself' : 'staff') : 'customer')+'">'+
