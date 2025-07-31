@@ -348,7 +348,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			console.log("delete");
 			var self = this;
 			var messageId = $(e.currentTarget).data('id');
-			_.confirm('Are you sure to delete?', function() {
+			confirm('Are you sure to delete?', function() {
 				$.post('/chats/messages/delete', {merchant_id:merchant_id,message_id:messageId}, function() {
 					self.getMessage();
 				});
