@@ -37,7 +37,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					var h = '';
 					_.each(data.messages.reverse(), function(m) {
 						if(m.status === '2') return;
-
 						var createdDateTime = moment(m.created_at);
 						
 						h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === 1002 ? 'myself' : 'staff') : 'customer')+'">'+
@@ -137,7 +136,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			} else if (message.indexOf('http') === 0 && (fname.indexOf('.ogg') > 0)) {
 				message = '<audio controls><source src="'+message+'" type="audio/ogg"></audio>';
 			} else {
-				//message = _.Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 				message = Autolinker.link(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 				var divTemp = document.createElement('div');
 				divTemp.innerHTML = message;
@@ -285,30 +283,46 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			var self = this;
 			var data = new FormData();
 			console.log("file");
-			// if (e.target.files.length) {
-			// 	data.append('module','/chats/messages/insert');
-			// 	data.append('mamId',self.mamId);
-			// 	data.append('userId',self.userId);
-			// 	_.each(e.target.files, function(value) {
-			// 		data.append('file',value);
-			// 	});
-			// 	MainView.showLoad(true);
-			// 	User.fetch({
-			// 		noset: true,
-			// 		data: data,
-			// 		processData: false,
-			// 		contentType: false,
-			// 		success: function(model,data,options) {
-			// 			if (options.apiStatus === 'SUCCESS') {
-			// 				getMessage();
-			// 			}
-			// 		},
-			// 		complete: function() {
-			// 			e.target.value = '';
-			// 			MainView.showLoad(false);
-			// 		}
-			// 	});
-			// }
+			if (e.target.files.length) {
+				//merchant_id:merchant_id,user_id:1002,chat_id:chat_id
+				data.append('merchant_id', merchant_id);
+				data.append('user_id',1002);
+				data.append('chat_id',chat_id);
+				_.each(e.target.files, function(value) {
+					data.append('file',value);
+				});
+
+				$.ajax({
+					url: 'http://api.livechat.com/v1/chats/messages/insert', // Server-side script to handle the upload
+					type: 'POST',
+					data: data, // The form containing the file input
+					processData: false, // Prevents jQuery from processing the data
+					contentType: false // Prevents jQuery from setting the content type
+				}).done(function() {
+					console.log("Files uploaded successfully!");
+				}).fail(function() {
+					console.log("Error: Files could not be uploaded.");
+				});
+
+				// MainView.showLoad(true);
+				//get
+				
+				// User.fetch({
+				// 	noset: true,
+				// 	data: data,
+				// 	processData: false,
+				// 	contentType: false,
+				// 	success: function(model,data,options) {
+				// 		if (options.apiStatus === 'SUCCESS') {
+				// 			getMessage();
+				// 		}
+				// 	},
+				// 	complete: function() {
+				// 		e.target.value = '';
+				// 		MainView.showLoad(false);
+				// 	}
+				// });
+			}
 		});	
 
 		$(document).on('click', '.voicestart', function(e){
