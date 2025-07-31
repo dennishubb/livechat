@@ -1,6 +1,6 @@
 <?php
 
-    parse_request(['merchant_id', 'user_id', 'file', 'message', 'source', 'status', 'created_datetime', 'template_id', 'template_type']);
+    parse_request(['merchant_id', 'chat_id', 'user_id', 'file', 'message', 'source', 'status', 'created_datetime', 'template_id', 'template_type']);
 
     if(empty($user_id) || empty($merchant_id)) http_response(code:400); 
 
@@ -15,10 +15,14 @@
         if(!empty($template)){$message = $template['message']; $template_id = $template['id'];}
         else http_response(code:400, message:"invalid template");
     }
+    if (!empty($_FILES['file']['tmp_name'])) {
+        $tmp = processUploadedFile($_FILES['file'],8);
+        $message = $tmp['fileURL'];
+    }
 
     //create or update chatroom whenever a message is sent
     include(ROOT.'/model/chat.php');
-    $chat = Chat::Search("SELECT id FROM chats WHERE user_id = %i AND merchant_id = %i", $user_id, $merchant_id);
+    $chat = Chat::Load($chat_id);
     if($chat === null){
         $chat = new Chat();
         $chat->merchant_id = $merchant_id;
@@ -48,7 +52,7 @@
     $chat_message->message       = $message;
     $chat_message->source        = $source;
     $chat_message->template_id   = empty($template_id) ? 0 : $template_id;
-    $chat_message->chat_id       = $chat->id;
+    $chat_message->chat_id       = $chat_id;
     $chat_message->save();
     $res['id'] = $chat_message->id;
 
