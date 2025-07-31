@@ -7,6 +7,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 	var pressSendTimer;
 	var templatesFlag = false;
 	var voicesend = 0;
+	var pin_id = 0;
 
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
@@ -31,7 +32,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 	
 					const player_id = data.chat.user_id;
 					const player_name = data.chat.user_name;
-					const pin_id = data.chat.pin_id;
+					pin_id = data.chat.pin_id;
 					var today = moment().format('D MMM YYYY ');
 					var h = '';
 					_.each(data.messages.reverse(), function(m) {
@@ -47,14 +48,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					});
 					// $('.action.profile').html(player_name);
 					$('.wrapper').html(h);
-	
-					if (pin_id === 0) {
-						$('.pin').hide();
-						$('.pin[data-setpin="0"]').show();
-					}else{
-						$('.pin').show();
-						$('.pin[data-setpin="0"]').hide();
-					}
 				}
 	
 				
@@ -78,6 +71,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			})
 			.done(function() {
 				if(templatesFlag === false) getTemplates();
+				togglePin();
 			});
 		}
 	
@@ -193,6 +187,16 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			}
 		};
 
+		function togglePin(){
+			if (pin_id !== 0) {
+				$('.pin').hide();
+				$('.pin[data-setpin="0"]').show();
+			}else{
+				$('.pin').show();
+				$('.pin[data-setpin="0"]').hide();
+			}
+		}
+
 		$(document).on('click', '.shortcut', function(e){
 			var key = '++'+$(e.currentTarget).data('key');
 			$('textarea').val(full_templates[key].message);
@@ -232,11 +236,11 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 		});
 
 		$(document).on('click', '.pin', function(e){
-			var pin_id = $(e.currentTarget).data('setpin');
-			$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:pin_id}, function (resp) {
-				console.log(resp);
-				// self.getPin = 1;
-				// self.getMessage();
+			$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
+				if(resp.status === 200){
+					pin_id = $(e.currentTarget).data('setpin');
+					togglePin();
+				};
 			});
 		});
 
