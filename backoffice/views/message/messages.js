@@ -349,7 +349,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			var self = this;
 			var messageId = $(e.currentTarget).data('id');
 			confirm('Are you sure to delete?', function() {
-				$.post('/chats/messages/delete', {merchant_id:merchant_id,message_id:messageId}, function() {
+				$.post('http://api.livechat.com/v1/chats/messages/delete', {merchant_id:merchant_id,message_id:messageId}, function() {
 					self.getMessage();
 				});
 			});
