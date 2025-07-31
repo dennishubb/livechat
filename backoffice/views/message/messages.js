@@ -346,12 +346,12 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 		$(document).on('click', '.delete', function(e){
 			var messageId = $(e.currentTarget).data('id');
-			confirm('Are you sure to delete?', function() {
+			if(confirm('Are you sure to delete?')){
 				console.log("hi");
 				$.post('http://api.livechat.com/v1/chats/messages/delete', {merchant_id:merchant_id,message_id:messageId}, function() {
 					getMessage();
 				});
-			});
+			}
 			$('.voice a').toggleClass('disabled');
 		});	
 	});
