@@ -2,6 +2,7 @@ const { template } = require("underscore");
 
 require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/recorder.min'], function($,_,moment,Autolinker,Recorder){
 
+	var full_templates = [];
 	var templates = [];
 	var shortcuts = [];
 	var template_id = 0;
@@ -98,6 +99,8 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 				if(resp.status === 200){
 					const data = resp.data;
+
+					full_templates = data.templates;
 
 					_.each(data.templates, function(v,k) {
 						if (k && k.length && k.substring(0,2) === '++') {
@@ -196,11 +199,9 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 		$(document).on('click', '.shortcut', function(e){
 			var key = '++'+$(e.currentTarget).data('key');
-			console.log(key);
-			console.log(templates);
-			$('textarea').val(templates[key].message);
+			$('textarea').val(full_templates[key].message);
 			$('.send.default').trigger('click');
-			template_id = templates[key].id;
+			template_id = full_templates[key].id;
 		});
 
 		$(document).on('change', '[name="template"]', function(e){
@@ -208,7 +209,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 				window.location.href = 'backoffice.livechat.com/templates/5';
 				// self.goTo('template', {trigger:true});
 			}
-			$('.textarea').val(templates[$(e.currentTarget).val()].message);
+			$('.textarea').val(full_templates[$(e.currentTarget).val()].message);
 			toggleTemplate();
 			$(e.currentTarget).val('');
 		});
