@@ -36,7 +36,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					var today = moment().format('D MMM YYYY ');
 					var h = '';
 					_.each(data.messages.reverse(), function(m) {
-						if(m.status === 2) return;
+						if(m.status === '2') return;
 
 						var createdDateTime = moment(m.created_at);
 						
