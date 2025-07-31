@@ -277,30 +277,31 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 		$(document).on('change', 'input[name="file"]', function(e){
 			var self = this;
 			var data = new FormData();
-			if (e.target.files.length) {
-				data.append('module','/chats/messages/insert');
-				data.append('mamId',self.mamId);
-				data.append('userId',self.userId);
-				_.each(e.target.files, function(value) {
-					data.append('file',value);
-				});
-				MainView.showLoad(true);
-				User.fetch({
-					noset: true,
-					data: data,
-					processData: false,
-					contentType: false,
-					success: function(model,data,options) {
-						if (options.apiStatus === 'SUCCESS') {
-							getMessage();
-						}
-					},
-					complete: function() {
-						e.target.value = '';
-						MainView.showLoad(false);
-					}
-				});
-			}
+			console.log("file");
+			// if (e.target.files.length) {
+			// 	data.append('module','/chats/messages/insert');
+			// 	data.append('mamId',self.mamId);
+			// 	data.append('userId',self.userId);
+			// 	_.each(e.target.files, function(value) {
+			// 		data.append('file',value);
+			// 	});
+			// 	MainView.showLoad(true);
+			// 	User.fetch({
+			// 		noset: true,
+			// 		data: data,
+			// 		processData: false,
+			// 		contentType: false,
+			// 		success: function(model,data,options) {
+			// 			if (options.apiStatus === 'SUCCESS') {
+			// 				getMessage();
+			// 			}
+			// 		},
+			// 		complete: function() {
+			// 			e.target.value = '';
+			// 			MainView.showLoad(false);
+			// 		}
+			// 	});
+			// }
 		});	
 
 		$(document).on('click', '.voicestart', function(e){
@@ -340,13 +341,14 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 
 		$(document).on('click', '.delete', function(e){
 			console.log("delete");
-			// var self = this;
-			// var messageId = $(e.currentTarget).data('id');
-			// _.confirm('Are you sure to delete?', function() {
-			// 	$.post('/chats/messages/delete', {mamId:self.mamId,id:messageId}, function() {
-			// 		self.getMessage();
-			// 	});
-			// });$('.voice a').toggleClass('disabled');
+			var self = this;
+			var messageId = $(e.currentTarget).data('id');
+			_.confirm('Are you sure to delete?', function() {
+				$.post('/chats/messages/delete', {merchant_id:merchant_id,message_id:messageId}, function() {
+					self.getMessage();
+				});
+			});
+			$('.voice a').toggleClass('disabled');
 		});	
 	});
 });
