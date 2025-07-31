@@ -268,7 +268,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			var message = $('textarea').val();
 			var whatsapp = $('.send.whatsapp').is(':visible') ? 2 : 0;
 			if (message) {
-				$.post('/chats/messages/insert', {mamId:self.mamId,userId:self.userId,message:message,whatsapp:whatsapp}, function() {
+				$.post('/chats/messages/insert', {merchant_id:merchant_id,user_id:1002,message:message,whatsapp:whatsapp}, function() {
 					$('textarea').val('');
 					getMessage();
 					toggleTemplate();
