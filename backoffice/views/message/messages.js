@@ -201,7 +201,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 		});
 
 		$(document).on('change', '[name="template"]', function(e){
-			if (e.val() === '(Edit Template)') {
+			if (e.currentTarget.val() === '(Edit Template)') {
 				window.location.href = 'backoffice.livechat.com/templates/5';
 				// self.goTo('template', {trigger:true});
 			}
