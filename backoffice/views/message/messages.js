@@ -1,5 +1,3 @@
-const { template } = require("underscore");
-
 require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/recorder.min'], function($,_,moment,Autolinker,Recorder){
 
 	var full_templates = [];
