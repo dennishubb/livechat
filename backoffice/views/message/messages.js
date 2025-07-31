@@ -71,6 +71,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 				if ($('.scrollable').css('opacity') === '0') {
 					$('.scrollable').css('opacity','1');
 					$('.scrollable')[0].scrollTop = $('.scrollable')[0].scrollHeight;
+					scrollToBottom();
 				} else {
 					scrollToBottom();
 				}
