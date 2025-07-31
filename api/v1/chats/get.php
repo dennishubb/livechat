@@ -15,14 +15,16 @@
 
 	if(is_array($merchant_id)){
 		$chats = DB::query("
-			SELECT a.id, a.merchant_id, a.user_id, a.pinned, a.pin_id, a.last_message, a.last_message_user_id, a.created_at,a.updated_at, b.name 
+			SELECT a.id, a.merchant_id, a.user_id, a.pinned, a.pin_id, a.last_message, a.last_message_user_id, a.created_at,a.updated_at, b.name AS user_name, c.name AS last_message_user_name
 			FROM chats a INNER JOIN users b ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
+			INNER JOIN users c ON a.merchant_id = c.merchant_id AND a.last_message_user_id = c.user_id
 			WHERE merchant_id IN %li AND updated_at >= %s ORDER BY updated_at DESC $queryLimit", $merchant_id, $updated_at
 		);
 	}else{
 		$chats = DB::query("
-			SELECT a.id, a.merchant_id, a.user_id, a.pinned, a.pin_id, a.last_message, a.last_message_user_id, a.created_at,a.updated_at, b.name 
+			SELECT a.id, a.merchant_id, a.user_id, a.pinned, a.pin_id, a.last_message, a.last_message_user_id, a.created_at,a.updated_at, b.name AS user_name, c.name AS last_message_user_name
 			FROM chats a INNER JOIN users b ON a.merchant_id = b.merchant_id AND a.user_id = b.user_id
+			INNER JOIN users c ON a.merchant_id = c.merchant_id AND a.last_message_user_id = c.user_id
 			WHERE merchant_id = %i AND updated_at >= %s ORDER BY updated_at DESC $queryLimit", $merchant_id, $updated_at
 		);
 	}
