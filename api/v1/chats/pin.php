@@ -2,7 +2,7 @@
 
 parse_request(['chat_id', 'pin_id']);
 
-if(empty($user_id)) http_response(code:400, message:'invalid user');
+if(empty($chat_id)) http_response(code:400, message:'invalid chat');
 
 include(ROOT.'/model/chat.php');
 
