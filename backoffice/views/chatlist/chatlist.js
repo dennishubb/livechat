@@ -17,10 +17,10 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 				return;
 			}
 			var chats = resp.data;
+			console.log(chats);
 			var today = moment().format('D MMM YYYY');
 			var h = '';
 			_.each(sortList(chats), function(m) {
-				console.log(m);
 				if (pin_id !== 'ALL' && pin_id !== parseInt(m.pin_id)) {
 					return;
 				}
