@@ -106,6 +106,9 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 							templates.push(k);
 						}
 					});
+
+					console.log(shortcuts);
+					console.log(templates)
 					// if (_.checkAccess(User.get('role'),'HideChatTool')) {
 					// 	self.$el.find('.chat-tools').remove();
 					// }
