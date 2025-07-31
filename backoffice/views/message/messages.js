@@ -1,6 +1,6 @@
 const { template } = require("underscore");
 
-require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], function($,_,moment,Autolinker){
+require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/recorder.min'], function($,_,moment,Autolinker,Recorder){
 
 	var templates = [];
 	var shortcuts = [];

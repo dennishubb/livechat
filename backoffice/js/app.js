@@ -7,7 +7,8 @@ require.config({
 		text: 'lib/text',
 		views: 'views',
 		router: 'js/router',
-		autolinker: 'lib/Autolinker.min'
+		autolinker: 'lib/Autolinker.min',
+		recorder: 'lib/recorder.min'
 	},
 	deps: [
 		'js/common',
