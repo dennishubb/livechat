@@ -177,7 +177,6 @@
         return ['mine' => $mime, 'extension' => $extension];
     }
     function processUploadedFile($file,$size,$compress = true, $purpose = false) {
-        global $MERCHANT;
         $file = $file['tmp_name'];
         $prop = validateFile($file,$size);
         if (!empty($prop['mine'])) {
