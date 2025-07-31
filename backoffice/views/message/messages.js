@@ -300,8 +300,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min'], functi
 		});	
 
 		$(document).on('click', '.voicestart', function(e){
-			var self = this;
-			if (Recorder.isRecordingSupported() && !$(e.currentTarget.hasClass('disabled')) {
+			if (Recorder.isRecordingSupported() && !$(e.currentTarget).hasClass('disabled')) {
 				if (typeof window.voiceRecorder === 'undefined') {
 					window.voiceRecorder = new Recorder({encoderPath:'https://static.gwvkyk.com/mobile/encoder-worker/encoderWorker.min.js'});
 				}
