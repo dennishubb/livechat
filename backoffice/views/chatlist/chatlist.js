@@ -145,7 +145,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
-			var pin_id = $(e.currentTarget).data('setpin') === 0 ? 1 : 0; 
+			var pin_id = parseInt($(e.currentTarget).data('setpin')) === 0 ? 1 : 0; 
 			var chat_id = parseInt($(this).closest('a.chat').attr('id'));
 			if (chat_id) {
 				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:pin_id}, function (resp) {
