@@ -39,7 +39,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 						if(m.status === '2') return;
 						var createdDateTime = moment(m.created_at);
 						
-						h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === 1002 ? 'myself' : 'staff') : 'customer')+'">'+
+						h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === user_id ? 'myself' : 'staff') : 'customer')+'">'+
 								'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
 								'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
 								'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
@@ -81,7 +81,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			const request = new URLSearchParams(
 				{
 					merchant_id: merchant_id,
-					user_id : 1002
+					user_id : user_id
 				}
 			).toString();
 	
@@ -271,7 +271,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			var message = $('textarea').val();
 			var whatsapp = $('.send.whatsapp').is(':visible') ? 2 : 0;
 			if (message) {
-				$.post('http://api.livechat.com/v1/chats/messages/insert', {merchant_id:merchant_id,user_id:1002,chat_id:chat_id,message:message,whatsapp:whatsapp}, function() {
+				$.post('http://api.livechat.com/v1/chats/messages/insert', {merchant_id:merchant_id,user_id:user_id,chat_id:chat_id,message:message,whatsapp:whatsapp}, function() {
 					$('textarea').val('');
 					getMessage();
 					toggleTemplate();
@@ -286,7 +286,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			if (e.target.files.length) {
 				//merchant_id:merchant_id,user_id:1002,chat_id:chat_id
 				data.append('merchant_id', merchant_id);
-				data.append('user_id',1002);
+				data.append('user_id',user_id);
 				data.append('chat_id',chat_id);
 				_.each(e.target.files, function(value) {
 					data.append('file',value);

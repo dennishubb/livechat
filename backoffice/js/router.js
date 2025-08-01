@@ -1,6 +1,7 @@
 let merchant_id = '';
 let chat_id = '';
 let token = '';
+let user_id = 1002;
 
 const route_path = function() {
 	let paths = location.pathname.split("/");
