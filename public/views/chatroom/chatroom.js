@@ -66,11 +66,11 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 								'<span class="text">'+getMessageHtml(m.message)+'</span>'+
 							'</div>'+
 						'</div>';
-					if (m.message.includes('@endChat') && m.last_message_user_id !== user_id) {
-						h = h.replaceAll('@endChat','');
-						h+= '<div class="chat-ended">Chat ended</div>';
-						endChat(m.id);
-					}
+					// if (m.message.includes('@endChat') && m.last_message_user_id !== user_id) {
+					// 	h = h.replaceAll('@endChat','');
+					// 	h+= '<div class="chat-ended">Chat ended</div>';
+					// 	endChat(m.id);
+					// }
 				}
 			});
 			if (h) {
