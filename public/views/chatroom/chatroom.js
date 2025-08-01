@@ -63,7 +63,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					}
 					h+= '<div class="message '+(m.last_message_user_id === user_id ? 'myself' : 'staff')+'">'+
 							'<div class="message-wrapper copy-text">'+
-								'<span class="name">'+m.user_name+'</span>'+
+								'<span class="name">'+m.name+'</span>'+
 								'<span class="copy fa fa-copy"></span>'+
 								'<span class="text">'+getMessageHtml(m.message)+'</span>'+
 							'</div>'+
@@ -164,7 +164,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			// 	}
 			// }
 		});
-		
+
 		// 	'change input[name="file"]': function(e) {
 		// 		var self = this;
 		// 		var data = new FormData();
