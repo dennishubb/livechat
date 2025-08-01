@@ -29,7 +29,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 		$(document).on('click', '.chat', function(e){
 			var chat_id = parseInt($(this).attr('id'));
-			window.location.href = BASEURL+'/chat/'+merchant_id+'/message/'+chat_id;
+			var m_id = parseInt($(this).attr('m_id'));
+			window.location.href = BASEURL+'/chat/'+m_id+'/message/'+chat_id;
 		});
 
 		function renderList(){
@@ -46,7 +47,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 					displayTime = displayTime.format('D MMM');
 				}
 				//href="chat/'+TOKEN+'/messages/'+m.id+'
-				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'"">'+
+				h+= '<a class="chat '+chatStatus(m)+'" id="'+m.id+'" m_id="'+m.merchant_id+'"">'+
 						'<p class="time">'+displayTime+'</p>'+
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
@@ -143,8 +144,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		$(document).on('click', '.pin', function(e){
 			e.stopPropagation();
 			e.preventDefault();
-			var mamId = parseInt($(e.currentTarget).closest('a.chat').data('mam-id')) || '';
-			var userId = parseInt($(e.currentTarget).closest('a.chat').data('id'));
+			var chat_id = parseInt($(this).attr('id'));
 			if (mamId && userId) {
 				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
 					getChats();
