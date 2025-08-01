@@ -62,7 +62,6 @@
 	background-size: cover;
 	background-position: center;
 	color: #fff;
-	visibility: hidden;
 }
 body.fullscreen #content {
 	z-index: 2;
