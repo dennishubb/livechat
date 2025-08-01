@@ -10,6 +10,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 	var pin_id = 0;
 	var messages = [];
 	var player_name = '';
+	var chat_id = '';
 
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatroom/chatroom.css">');
@@ -33,6 +34,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 					const data = resp.data;
 	
 					player_name = data.chat.user_name;
+					chat_id = data.chat.id;
 					messages = data.messages;
 					showMessage();
 				}
@@ -104,5 +106,115 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 				$('.scrollable').scrollTop($('.wrapper').height());
 			}
 		};
+
+		$(document).on('focus', 'textarea', function(e){
+			$('textarea').trigger('input');
+			setTimeout(function() {
+				$('textarea').trigger('input');
+			},300);
+		});
+
+		$(document).on('input', 'textarea', function(e){
+			e.currentTarget.style.height = '0px';
+			e.currentTarget.style.height = (e.currentTarget.scrollHeight)+'px';
+			var tmp = $('.chat-tools').height();
+			$('.scrollable').css('height','calc(100% - '+tmp+'px)');
+			scrollToBottom(true);
+		});
+
+		$(document).on('click', '.message img', function(e){
+			window.open($(e.currentTarget).attr('src'));
+		});
+
+		$(document).on('click', '.send', function(e){
+
+			var message = $('textarea').val();
+			if (message) {
+				$.post('http://api.livechat.com/v1/chats/messages/insert', {merchant_id:merchant_id,user_id:user_id,chat_id:chat_id,message:message}, function() {
+					$('textarea').val('');
+					getMessage();
+				});
+			}
+
+			// var self = this;
+			// var message = $('textarea').val();
+			// var stranger = User.get('id') ? false : true;
+			// if (message) {
+			// 	var data = {message:message};
+			// 	var completed = function() {
+			// 		$.post('/chat/send', data, function(res) {
+			// 			if (stranger && res && res.id && res.token) {
+			// 				User.clear({silent:true}).set(res).saveLocal();
+			// 				User.syncData(function() {
+			// 					self.render();
+			// 				});
+			// 			} else {
+			// 				self.loadMessages();
+			// 				$textarea.val('').trigger('input');
+			// 			}
+			// 		});
+			// 	};
+			// 	if (stranger) {
+			// 		MainView.showCaptcha(function(captchaOutput) {
+			// 			data['captchaOutput'] = captchaOutput;
+			// 			completed();
+			// 		});
+			// 	} else {
+			// 		completed();
+			// 	}
+			// }
+		});
+		
+		// 	'change input[name="file"]': function(e) {
+		// 		var self = this;
+		// 		var data = new FormData();
+		// 		var stranger = User.get('id') ? false : true;
+		// 		if (e.target.files.length) {
+		// 			_.each(e.target.files, function(value) {
+		// 				data.append('file', value);
+		// 			});
+		// 			var completed = function() {
+		// 				$.ajax({
+		// 					url: '/chat/send',
+		// 					data: data,
+		// 					processData: false,
+		// 					contentType: false,
+		// 					type: 'POST',
+		// 					success: function(res) {
+		// 						if (stranger && res && res.id && res.token) {
+		// 							User.clear({silent:true}).set(res).saveLocal();
+		// 							User.syncData(function() {
+		// 								self.render();
+		// 							});
+		// 						} else {
+		// 							self.loadMessages();
+		// 							e.target.value = '';
+		// 						}
+		// 					}
+		// 				});
+		// 			};
+		// 			if (stranger) {
+		// 				MainView.showCaptcha(function(captchaOutput) {
+		// 					data.append('captchaOutput', captchaOutput);
+		// 					completed();
+		// 				});
+		// 			} else {
+		// 				completed();
+		// 			}
+		// 		}
+		// 	},
+		// 	'click .tips-container': function(e) {
+		// 		var self = this;
+		// 		MainView.tips({chatData:self.chatData});
+		// 	},
+		// 	'click .copy-text': function(e) {
+		// 		var $this = $(e.currentTarget);
+		// 		if(_.settingConfig('disableCopyChat')){
+		// 			return;
+		// 		}
+		// 		var textContent = $this.find('span.text').text();
+		// 		navigator.clipboard.writeText(textContent);
+		// 	},
+		// }
 	});
 });
