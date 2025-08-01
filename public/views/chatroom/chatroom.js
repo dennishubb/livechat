@@ -89,7 +89,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			} else if (message.indexOf('http') === 0 && (message.indexOf('.ogg') > 0)) {
 				message = '<audio controls><source src="'+message+'" type="audio/ogg"></audio>';
 			} else {
-				message = Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+				message = Autolinker.link(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 			}
 			return message;
 		};
