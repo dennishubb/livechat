@@ -1,6 +1,6 @@
 <?php
 
-    $allowed_origin = str_contains($_SERVER['HTTP_HOST'], 'backoffice') ? 'http://backoffice.livechat.com' : 'http://public.livechat.com';
+    $allowed_origin = str_contains($_SERVER['SERVER_NAME'], 'backoffice') ? 'http://backoffice.livechat.com' : 'http://public.livechat.com';
 
     header('Access-Control-Allow-Origin: '.$allowed_origin);
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
