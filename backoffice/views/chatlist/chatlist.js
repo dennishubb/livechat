@@ -52,7 +52,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
 						'<i class="fa fa-exclamation-circle exclamation"></i>'+
-						'<span class="pin" data-setpin="'+(m.pin_id === 0 ? 0 : 1)+'">PIN</span>'+
+						'<span class="pin" data-setpin="'+(m.pin_id === 0 ? 1 : 0)+'">PIN</span>'+
 					'</a>';
 			});
 
