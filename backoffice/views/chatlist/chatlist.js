@@ -52,7 +52,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
 						'<i class="fa fa-exclamation-circle exclamation"></i>'+
-						'<span class="pin" data-setpin="'+(m.pin_id === 0 ? 1 : 0)+'">PIN</span>'+
+						'<span class="pin" data-setpin="'+(m.pin_id === 0 ? 0 : 1)+'">'+(m.pin_id === 0 ? 'PIN' : 'UNPIN')+'</span>'+
 					'</a>';
 			});
 
@@ -145,7 +145,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
-			$(e.currentTarget).data('setpin') === 0 ? $(e.currentTarget).val('PIN') : $(e.currentTarget).val('UNPIN'); 
+			var pin_id = $(e.currentTarget).data('setpin') === 0 ? 1 : 0; 
 			var chat_id = parseInt($(this).closest('a.chat').attr('id'));
 			if (chat_id) {
 				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
