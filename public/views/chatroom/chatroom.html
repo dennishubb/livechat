@@ -1,0 +1,21 @@
+<div class="scrollable">
+	<div class="wrapper">
+		<div class="time"><%= moment().format('h:mma') %></div>
+		<div class="message staff">
+			<div class="message-wrapper">
+				<span class="name"><%= _.getVar('merchantName') %></span>
+				<% if (livechatPromo) { %>
+				<span class="text"><%= _.Autolinker(livechatPromo.replace(/(?:\r\n|\r|\n)/g, '<br>')) %></span>
+				<% } else { %>
+				<span class="text">Welcome Boss!</span>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="chat-tools">
+	<textarea placeholder="Text here..."></textarea>
+	<i class="tool send fa fa-paper-plane"></i>
+	<label class="tool file fa fa-paperclip"><input type="file" name="file"></label>
+</div>
+<script src="/views/chatroom/chatroom.js" type="text/javascript"></script>
