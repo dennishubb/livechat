@@ -145,7 +145,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			e.stopPropagation();
 			e.preventDefault();
 			var chat_id = parseInt($(this).attr('id'));
-			if (mamId && userId) {
+			if (chat_id) {
 				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
 					getChats();
 				});
