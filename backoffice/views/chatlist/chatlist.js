@@ -135,8 +135,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 
 		$(document).on('click', '.pin-type', function(e){
 			$(e.currentTarget).addClass('selected').siblings().removeClass('selected');
-			localStorage.setItem('PINTYPE', $this.data('type'));
 			pintype = $(e.currentTarget).data('type');
+			localStorage.setItem('PINTYPE', pintype);
 			renderList();
 		});
 
