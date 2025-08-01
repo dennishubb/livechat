@@ -142,6 +142,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		});
 
 		$(document).on('click', '.pin', function(e){
+			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
 			if($(e.currentTarget).data('setpin') === 0) $(e.currentTarget).val('PIN') : $(e.currentTarget).val('UNPIN'); 
