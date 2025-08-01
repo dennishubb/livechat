@@ -1,27 +1,42 @@
 require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 	$(function() {
-
-		var pin_id = localStorage.getItem("PINTYPE") ? localStorage.getItem("PINTYPE") : 'ALL';
+		var pintype = localStorage.getItem("PINTYPE") ? localStorage.getItem("PINTYPE") : 'ALL';
+		var chats = [];
 
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatlist/chatlist.css">');
-	
-		const request = new URLSearchParams(
-			{
-				merchant_id: merchant_id
-			}
-		).toString();
 
-		$.get('http://api.livechat.com/v1/chats/get', request, function(response){
-			const resp = JSON.parse(response);
-			if (!(resp.data && resp.data.length)) {
-				return;
-			}
-			var chats = resp.data;
-			console.log(chats);
+		$('.pin-type[data-type="'+pintype+'"]').addClass('selected');
+	
+		toggleButtonState();
+		getChats();
+
+		function getChats(){
+			const request = new URLSearchParams(
+				{
+					merchant_id: merchant_id
+				}
+			).toString();
+
+			$.get('http://api.livechat.com/v1/chats/get', request, function(response){
+				const resp = JSON.parse(response);
+				if (!(resp.data && resp.data.length)) {
+					return;
+				}
+				chats = resp.data;
+				renderList();
+			});
+		}
+
+		$(document).on('click', '.chat', function(e){
+			var chat_id = parseInt($(this).attr('id'));
+			window.location.href = BASEURL+'/chat/'+merchant_id+'/message/'+chat_id;
+		});
+
+		function renderList(){
 			var today = moment().format('D MMM YYYY');
 			var h = '';
 			_.each(sortList(chats), function(m) {
-				if (pin_id !== 'ALL' && pin_id !== parseInt(m.pin_id)) {
+				if (pintype !== 'ALL' && pintype !== parseInt(m.pin_id)) {
 					return;
 				}
 				var displayTime = moment(m.created_at);
@@ -36,18 +51,12 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 						'<p class="name">'+m.user_name+'</p>'+
 						'<p class="text">'+m.last_message.replace(/(?:\r\n|\r|\n|(<([^>]+)>))/g, ' ')+'</p>'+
 						'<i class="fa fa-exclamation-circle exclamation"></i>'+
-						'<span class="pin" data-setpin="'+(m.pinned ? 0 : 1)+'">PIN</span>'+
+						'<span class="pin" data-setpin="'+(m.pin_id === 0 ? 0 : 1)+'">PIN</span>'+
 					'</a>';
 			});
 
 			$('.wrapper').html(h);
-		});
-
-		$(document).on('click', '.chat', function(e){
-		// $('.chat').click(function(e){
-			var chat_id = parseInt($(this).attr('id'));
-			window.location.href = BASEURL+'/chat/'+merchant_id+'/message/'+chat_id;
-		});
+		}
 	
 		function sortList(chats) {
 			// self = this;
@@ -66,7 +75,6 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			// 		return a[s]+b;
 			// 	});
 			// }
-			console.log('sortList');
 			chats = _.sortBy(chats, function(m) {
 				if (chatStatus(m) === 'pinned') {
 					return 'pinned';
@@ -78,11 +86,8 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 		};
 		
 		function chatStatus(m) {
-			console.log('chatstatus');
 			if (parseInt(m.pinned)) {
-				console.log('pinned?');
 				if (m.last_message_user_id !== m.user_id) {
-					console.log('admin pin');
 					return 'yellow';
 				}
 				return 'yellow';
@@ -121,32 +126,28 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			// }
 			return 'orange';
 		};
-	
-		// toggleButtonState: function() {
-		// 	var playSound = _.getLocalStorage('CHATSOUND');
-		// 	var btn = $('.chat-sound');
-		// 	playSound === 'off' ? btn.text('Sound Off') : btn.text('Sound On');
-		// },
+
+		function toggleButtonState(){
+			var playSound = localStorage.getItem('CHATSOUND');
+			var btn = $('.chat-sound');
+			playSound === 'off' ? btn.text('Sound Off') : btn.text('Sound On');
+		};
 
 		$(document).on('click', '.pin-type', function(e){
-			var $this = $(e.currentTarget);
-			$this.addClass('selected').siblings().removeClass('selected');
+			$(e.currentTarget).addClass('selected').siblings().removeClass('selected');
 			localStorage.setItem('PINTYPE', $this.data('type'));
-			pin_id = $this.data('type');
+			pintype = $(e.currentTarget).data('type');
+			renderList();
 		});
 
 		$(document).on('click', '.pin', function(e){
-			console.log("pin");
 			e.stopPropagation();
 			e.preventDefault();
-			var $this = $(e.currentTarget);
-			var mamId = parseInt($this.closest('a.chat').data('mam-id')) || '';
-			var userId = parseInt($this.closest('a.chat').data('id'));
-			var setPin = $this.data('setpin');
+			var mamId = parseInt($(e.currentTarget).closest('a.chat').data('mam-id')) || '';
+			var userId = parseInt($(e.currentTarget).closest('a.chat').data('id'));
 			if (mamId && userId) {
-				$.post('/chat/pin', {mamId:mamId,userId:userId,setPin:setPin}, function () {
-					self.maCreatedDateTime[mamId] = '';
-					self.getChats();
+				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
+					getChats();
 				});
 			}
 		});

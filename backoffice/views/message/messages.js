@@ -12,7 +12,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/message/messages.css">');
 
-		console.log(user_id);
 		const request = new URLSearchParams(
 			{
 				merchant_id: merchant_id, 
