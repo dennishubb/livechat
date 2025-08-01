@@ -45,7 +45,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	height: calc(100% - 55px);
+	height: calc(100% - 65);
 	visibility: hidden;
 }
 #chatroom .time {
