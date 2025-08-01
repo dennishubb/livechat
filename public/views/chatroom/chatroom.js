@@ -92,7 +92,7 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 				message = Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
 			}
 			return message;
-		},
+		};
 		
 		function scrollToBottom(force) {
 			var hidden = false;
@@ -103,6 +103,6 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 			if (force || hidden || $('.scrollable')[0].scrollTop + $('.scrollable').height() + 200 >= $('.scrollable')[0].scrollHeight) {
 				$('.scrollable').scrollTop($('.wrapper').height());
 			}
-		},
+		};
 	});
 });
