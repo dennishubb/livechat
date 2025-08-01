@@ -146,7 +146,7 @@ require(['jquery', 'underscore', 'lib/moment.min'], function($,_,moment){
 			e.stopPropagation();
 			e.preventDefault();
 			$(e.currentTarget).data('setpin') === 0 ? $(e.currentTarget).val('PIN') : $(e.currentTarget).val('UNPIN'); 
-			var chat_id = parseInt($(this).attr('id'));
+			var chat_id = parseInt($(this).closest('a.chat').attr('id'));
 			if (chat_id) {
 				$.post('http://api.livechat.com/v1/chats/pin', {chat_id: chat_id,pin_id:$(e.currentTarget).data('setpin')}, function (resp) {
 					getChats();
