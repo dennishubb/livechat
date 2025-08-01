@@ -26,6 +26,7 @@ $res['messages'] = $messages;
 $res['chat']['user_id'] = $chat->user_id;
 $res['chat']['user_name'] = DB::queryFirstField("SELECT name FROM users WHERE merchant_id = %i AND user_id = %i", $merchant_id, $chat->user_id);
 $res['chat']['pin_id'] = $chat->pin_id;
+$res['chat']['last_message_user_id'] = $chat->last_message_user_id;
 
 http_response(data: $res);
 

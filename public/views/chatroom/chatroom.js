@@ -8,72 +8,101 @@ require(['jquery', 'underscore', 'lib/moment.min', 'lib/Autolinker.min', 'lib/re
 	var templatesFlag = false;
 	var voicesend = 0;
 	var pin_id = 0;
+	var messages = [];
+	var player_name = '';
 
 	$(function() {
 		$('head').append('<link rel="stylesheet" type="text/css" href="/views/chatroom/chatroom.css">');
 
-		// const request = new URLSearchParams(
-		// 	{
-		// 		merchant_id: merchant_id, 
-		// 		chat_id: chat_id
-		// 	}
-		// ).toString();
+		const request = new URLSearchParams(
+			{
+				merchant_id: merchant_id, 
+				user_id: user_id
+			}
+		).toString();
 
-		// getMessage();
+		//add checking if registered user, call api. else dont
+		getMessage();
 
-		// function getMessage(){
-		// 	$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
-		// 		const resp = JSON.parse(response);
+		function getMessage(){
+			$.get('http://api.livechat.com/v1/chats/messages/get', request, function(response){
+				const resp = JSON.parse(response);
+				console.log(resp);
 	
-		// 		console.log(resp);
+				if(resp.status === 200){
+					const data = resp.data;
 	
-		// 		if(resp.status === 200){
-		// 			const data = resp.data;
-	
-		// 			const player_id = data.chat.user_id;
-		// 			const player_name = data.chat.user_name;
-		// 			pin_id = data.chat.pin_id;
-		// 			var today = moment().format('D MMM YYYY ');
-		// 			var h = '';
-		// 			_.each(data.messages.reverse(), function(m) {
-		// 				if(m.status === '2') return;
-		// 				var createdDateTime = moment(m.created_at);
-						
-		// 				h+= '<div class="message '+(m.user_id !== player_id ? (m.user_id === user_id ? 'myself' : 'staff') : 'customer')+'">'+
-		// 						'<p class="btn danger delete fa fa-trash-o" data-id="'+m.id+'"></p>'+
-		// 						'<p class="time">'+createdDateTime.format('D MMM YYYY h:mma').replace(today,'')+'</p>'+
-		// 						'<p class="channel '+showChannel(m)+' '+(m.status || '')+'">'+showChannel(m)+'</p>'+
-		// 						'<p class="name">'+(m.user_id !== player_id ? m.name : '<span class="profile"><i class="fa fa-user"></i>'+player_name+'</span>')+'</p>'+
-		// 						'<p class="text">'+showMessage(m.message)+'</p>'+
-		// 					'</div>';
-		// 			});
-		// 			// $('.action.profile').html(player_name);
-		// 			$('.wrapper').html(h);
-		// 		}
-	
-				
-		// 		// if (_.checkAccess(self.role,'ShowDeleteChat')) {
-		// 		// 	self.$el.find('.delete').show();
-		// 		// } else {
-		// 		// 	self.$el.find('.delete').hide();
-		// 		// }
-		// 		// if (_.checkAccess(self.role,'HidePinChat')) {
-		// 		// 	self.$el.find('.pin').hide();
-		// 		// }
-		// 	})
-		// 	.always(function() {
-		// 		if ($('.scrollable').css('opacity') === '0') {
-		// 			$('.scrollable').css('opacity','1');
-		// 			$('.scrollable')[0].scrollTop = $('.scrollable')[0].scrollHeight;
-		// 		} else {
-		// 			scrollToBottom();
-		// 		}
-		// 		// MainView.periodic(self,self.getMessage,5000);
-		// 	})
-		// 	.done(function() {
-		// 		if(templatesFlag === false) getTemplates();
-		// 		togglePin();
-		// 	});
-		// }
+					player_name = data.chat.user_name;
+					messages = data.messages;
+					showMessage();
+				}
+			}).done(function(response){
+				scrollToBottom();
+			});
+		}
+		
+		function showMessage() {
+			var today = moment().format('D MMM YYYY');
+			var lastCreatedDateTime = '';
+			var lastMsgTime = '';
+			var h = '';
+			var aR = false; // adminResponse
+			_.each(messages.reverse(), function(m) {
+				if (m.status !== 2) {
+					var createdDateTime = moment(m.created_at);
+					if (lastCreatedDateTime === '' || createdDateTime.diff(lastCreatedDateTime) > 600000) {
+						var msgDate = createdDateTime.format('D MMM YYYY');
+						var msgTime = msgDate === today ? createdDateTime.format('h:mma') : msgDate;
+						if (msgTime !== lastMsgTime) {
+							lastMsgTime = msgTime;
+							h+= '<div class="time">'+msgTime+'</div>';
+						}
+						lastCreatedDateTime = createdDateTime;
+					}
+					h+= '<div class="message '+(m.last_message_user_id === user_id ? 'myself' : 'staff')+'">'+
+							'<div class="message-wrapper copy-text">'+
+								'<span class="name">'+m.user_name+'</span>'+
+								'<span class="copy fa fa-copy"></span>'+
+								'<span class="text">'+getMessageHtml(m.message)+'</span>'+
+							'</div>'+
+						'</div>';
+					if (m.message.includes('@endChat') && m.last_message_user_id !== user_id) {
+						h = h.replaceAll('@endChat','');
+						h+= '<div class="chat-ended">Chat ended</div>';
+						endChat(m.id);
+					}
+				}
+			});
+			if (h) {
+				var chatToolHeight = $('.chat-tools').height();
+				$('.scrollable').css('height','calc(100% - '+chatToolHeight+'px)');
+				$('.wrapper').html(h);
+			}
+		};
+		
+		function getMessageHtml(message) {
+			var self = this;
+			if (message.indexOf('firebasestorage') > 0) {
+				message = '<img src="'+message+'">';
+			} else if (message.indexOf('http') === 0 && (message.indexOf('.jpg') > 0 || message.indexOf('.png') > 0 || message.indexOf('.gif') > 0)) {
+				message = '<img src="'+message+'">';
+			} else if (message.indexOf('http') === 0 && (message.indexOf('.ogg') > 0)) {
+				message = '<audio controls><source src="'+message+'" type="audio/ogg"></audio>';
+			} else {
+				message = Autolinker(message.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+			}
+			return message;
+		},
+		
+		function scrollToBottom(force) {
+			var hidden = false;
+			if ($('.scrollable').css('visibility') === 'hidden') {
+				hidden = true;
+				$('.scrollable').css('visibility','visible');
+			}
+			if (force || hidden || $('.scrollable')[0].scrollTop + $('.scrollable').height() + 200 >= $('.scrollable')[0].scrollHeight) {
+				$('.scrollable').scrollTop($('.wrapper').height());
+			}
+		},
 	});
 });
